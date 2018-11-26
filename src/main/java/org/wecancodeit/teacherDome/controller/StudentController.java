@@ -14,8 +14,8 @@ public class StudentController {
 	@Resource
 	StudentRepo studentRepo;
 
-	@GetMapping("student/{id}")
-	public String getDoggo(@PathVariable(value = "id") Long id, Model model) {
+	@GetMapping("students/{id}")
+	public String getStudent(@PathVariable(value = "id") Long id, Model model) {
 		model.addAttribute("student", studentRepo.findById(id).get());
 		return "student";
 
