@@ -24,4 +24,11 @@ public class StudentRepositoryTest {
 		assertThat(result, hasItems(studentTed));
 	}
 
+	@Test
+	public void shouldContainMultipleStudents() {
+		Student studentTed = studentRepo.save(new Student("Ted", "", "", ""));
+		Student studentTina = studentRepo.save(new Student("Tina", "", "", ""));
+		Iterable<Student> result = studentRepo.findAll();
+		assertThat(result, hasItems(studentTed, studentTina));
+	}
 }
