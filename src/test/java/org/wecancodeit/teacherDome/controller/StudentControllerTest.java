@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.wecancodeit.teacherDome.repo.StudentRepo;
+import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(StudentController.class)
@@ -20,7 +20,7 @@ public class StudentControllerTest {
 	private MockMvc mock;
 
 	@MockBean
-	StudentRepo repo;
+	StudentRepository studentRepo;
 
 	@Test
 	public void individualStudentPageOK() throws Exception {
