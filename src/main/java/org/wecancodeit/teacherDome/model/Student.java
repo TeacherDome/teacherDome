@@ -1,9 +1,11 @@
 package org.wecancodeit.teacherDome.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+@Entity
 public class Student {
 
 	private String lastName;
@@ -17,6 +19,10 @@ public class Student {
 	private String notes;
 
 	private String schoolId;
+
+	public Student() {
+
+	}
 
 	public Student(String lastName, String firstName, String notes, String schoolId) {
 		this.lastName = lastName;
@@ -46,4 +52,3 @@ public class Student {
 	}
 
 }
-
