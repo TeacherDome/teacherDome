@@ -5,13 +5,13 @@ import javax.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.teacherDome.model.Student;
-import org.wecancodeit.teacherDome.repo.StudentRepo;
+import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
 @Service
 public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
-	StudentRepo studentRepo;
+	StudentRepository studentRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
