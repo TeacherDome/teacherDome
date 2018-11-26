@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
-@Controller
-public class StudentController {
+@CrossOrigin
+@RestController
+public class ApiController {
 
 	@Resource
 	StudentRepository studentRepo;
 
-	@GetMapping("students/{id}")
-	public String getStudent(@PathVariable(value = "id") Long id, Model model) {
-		model.addAttribute("student", studentRepo.findById(id).get());
-		return "student";
+	@GetMapping("/api/students")
+	public Iterable<Student> getStudent() {
+		return studentRepo.findAll();
 	}
-
 }
