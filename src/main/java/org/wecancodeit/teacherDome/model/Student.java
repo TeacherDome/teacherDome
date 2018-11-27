@@ -20,19 +20,50 @@ public class Student {
 
 	private String studentSchoolIdNumber;
 
+	private int[] studentMathScores;
+
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentFamilyNotes;
+
 	public Student() {
 
 	}
 
-	public Student(String lastName, String firstName, String notes, String schoolId) {
-		this.studentLastName = lastName;
-		this.studentFirstName = firstName;
-		this.studentNotes = notes;
-		this.studentSchoolIdNumber = schoolId;
-	}
-
 	public String getStudentLastName() {
 		return studentLastName;
+	}
+
+	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
+			int[] studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
+		this.studentLastName = studentLastName;
+		this.studentFirstName = studentFirstName;
+		this.studentNotes = studentNotes;
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
+		this.studentMathScores = studentMathScores;
+		this.studentHealthNotes = studentHealthNotes;
+		this.studentFamilyNotes = studentFamilyNotes;
+	}
+
+	// bare-minimum constructor
+	public Student(String studentLastName, String studentFirstName, String studentSchoolIdNumber) {
+		this.studentLastName = studentLastName;
+		this.studentFirstName = studentFirstName;
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
+	}
+
+	public int[] getStudentMathScores() {
+		return studentMathScores;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public String getStudentFamilyNotes() {
+		return studentFamilyNotes;
 	}
 
 	public String getStudentFirstName() {
