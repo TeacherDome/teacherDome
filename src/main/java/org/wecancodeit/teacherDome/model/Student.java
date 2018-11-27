@@ -24,10 +24,18 @@ public class Student {
 //	@Lob
 //	private String studentHealthNotes;
 
+<<<<<<< HEAD
 //	@Lob
 //	private String studentFamilyNotes;
 //
 //	private Collection<Integer> studentMathScores;
+=======
+	private ArrayList<Integer> studentMathScores = new ArrayList<Integer>();
+
+	public String getStudentLastName() {
+		return studentLastName;
+	}
+>>>>>>> 8c9efc077fa70174e45f40f8966af084d4c5547d
 
 	public Student() {
 
