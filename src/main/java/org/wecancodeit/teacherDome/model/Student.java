@@ -1,5 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,13 +23,13 @@ public class Student {
 
 	private String studentSchoolIdNumber;
 
-	private int[] studentMathScores;
-
 	@Lob
 	private String studentHealthNotes;
 
 	@Lob
 	private String studentFamilyNotes;
+
+	private Collection<Integer> studentMathScores = new ArrayList<Integer>();
 
 	public Student() {
 
@@ -37,7 +40,7 @@ public class Student {
 	}
 
 	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
-			int[] studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
+			ArrayList<Integer> studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
 		this.studentLastName = studentLastName;
 		this.studentFirstName = studentFirstName;
 		this.studentNotes = studentNotes;
