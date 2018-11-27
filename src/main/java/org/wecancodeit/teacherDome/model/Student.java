@@ -8,47 +8,47 @@ import javax.persistence.Lob;
 @Entity
 public class Student {
 
-	private String lastName;
-	private String firstName;
+	private String studentLastName;
+	private String studentFirstName;
 
 	@GeneratedValue
 	@Id
-	private Long id;
+	private Long studentId;
 
 	@Lob
-	private String notes;
+	private String studentNotes;
 
-	private String schoolId;
+	private String studentSchoolIdNumber;
 
 	public Student() {
 
 	}
 
 	public Student(String lastName, String firstName, String notes, String schoolId) {
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.notes = notes;
-		this.schoolId = schoolId;
+		this.studentLastName = lastName;
+		this.studentFirstName = firstName;
+		this.studentNotes = notes;
+		this.studentSchoolIdNumber = schoolId;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getStudentLastName() {
+		return studentLastName;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getStudentFirstName() {
+		return studentFirstName;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getStudentId() {
+		return studentId;
 	}
 
-	public String getNotes() {
-		return notes;
+	public String getStudentNotes() {
+		return studentNotes;
 	}
 
-	public String getSchoolId() {
-		return schoolId;
+	public String getStudentSchoolIdNumber() {
+		return studentSchoolIdNumber;
 	}
 
 }
