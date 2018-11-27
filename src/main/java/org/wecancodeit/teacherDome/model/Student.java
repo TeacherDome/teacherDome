@@ -1,7 +1,6 @@
 package org.wecancodeit.teacherDome.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class Student {
 	@Lob
 	private String studentFamilyNotes;
 
-	private ArrayList<Integer> studentMathScores = new ArrayList<Integer>();
+	private ArrayList<Integer> studentMathScores;
 
 	public String getStudentLastName() {
 		return studentLastName;
@@ -39,7 +38,7 @@ public class Student {
 
 	}
 
-	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
+	public Student(String studentFirstName, String studentLastName, String studentNotes, String studentSchoolIdNumber,
 			ArrayList<Integer> studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
 		this.studentLastName = studentLastName;
 		this.studentFirstName = studentFirstName;
@@ -51,7 +50,7 @@ public class Student {
 	}
 
 	// bare-minimum constructor
-	public Student(String studentLastName, String studentFirstName, String studentSchoolIdNumber) {
+	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber) {
 		this.studentLastName = studentLastName;
 		this.studentFirstName = studentFirstName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
