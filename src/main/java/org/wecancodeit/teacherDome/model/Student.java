@@ -20,19 +20,49 @@ public class Student {
 
 	private String studentSchoolIdNumber;
 
+	private int studentMathScore;
+	private int studentReadingScore;
+
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentFamilyNotes;
+
 	public Student() {
 
 	}
 
-	public Student(String lastName, String firstName, String notes, String schoolId) {
-		this.studentLastName = lastName;
-		this.studentFirstName = firstName;
-		this.studentNotes = notes;
-		this.studentSchoolIdNumber = schoolId;
-	}
-
 	public String getStudentLastName() {
 		return studentLastName;
+	}
+
+	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
+			int studentMathScore, int studentReadingScore, String studentHealthNotes, String studentFamilyNotes) {
+		this.studentLastName = studentLastName;
+		this.studentFirstName = studentFirstName;
+		this.studentNotes = studentNotes;
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
+		this.studentMathScore = studentMathScore;
+		this.studentReadingScore = studentReadingScore;
+		this.studentHealthNotes = studentHealthNotes;
+		this.studentFamilyNotes = studentFamilyNotes;
+	}
+
+	public int getStudentMathScore() {
+		return studentMathScore;
+	}
+
+	public int getStudentReadingScore() {
+		return studentReadingScore;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public String getStudentFamilyNotes() {
+		return studentFamilyNotes;
 	}
 
 	public String getStudentFirstName() {
