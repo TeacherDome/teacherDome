@@ -35,8 +35,4 @@ public class MathScores {
 		return mathScores;
 	}
 
-	public void addScore(float newScore) {
-		mathScores.;
-	}
-
 }
