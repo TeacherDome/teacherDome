@@ -23,9 +23,10 @@ public class ApiController {
 		return studentRepo.findAll();
 	}
 
-	@PostMapping("/api/students/addStudent")
+	@PostMapping("http://localhost:3000/api/students/addStudent/api/students/addStudent")
 	public void addStudent(String studentFirstName, String studentLastName, String studentstudentSchoolIdNumber) {
 		studentRepo.save(new Student(studentFirstName, studentLastName, studentstudentSchoolIdNumber));
+
 	}
 
 }

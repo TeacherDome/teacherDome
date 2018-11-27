@@ -1,5 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,19 +23,50 @@ public class Student {
 
 	private String studentSchoolIdNumber;
 
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentFamilyNotes;
+
+	private Collection<Integer> studentMathScores = new ArrayList<Integer>();
+
+	public String getStudentLastName() {
+		return studentLastName;
+	}
+
 	public Student() {
 
 	}
 
-	public Student(String lastName, String firstName, String notes, String schoolId) {
-		this.studentLastName = lastName;
-		this.studentFirstName = firstName;
-		this.studentNotes = notes;
-		this.studentSchoolIdNumber = schoolId;
+	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
+			ArrayList<Integer> studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
+		this.studentLastName = studentLastName;
+		this.studentFirstName = studentFirstName;
+		this.studentNotes = studentNotes;
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
+		this.studentMathScores = studentMathScores;
+		this.studentHealthNotes = studentHealthNotes;
+		this.studentFamilyNotes = studentFamilyNotes;
 	}
 
-	public String getStudentLastName() {
-		return studentLastName;
+	// bare-minimum constructor
+	public Student(String studentLastName, String studentFirstName, String studentSchoolIdNumber) {
+		this.studentLastName = studentLastName;
+		this.studentFirstName = studentFirstName;
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
+	}
+
+	public ArrayList<Integer> getStudentMathScores() {
+		return (ArrayList<Integer>) studentMathScores;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public String getStudentFamilyNotes() {
+		return studentFamilyNotes;
 	}
 
 	public String getStudentFirstName() {
