@@ -17,37 +17,28 @@ public class Student {
 	@GeneratedValue
 	@Id
 	private Long studentId;
-
-	@Lob
-	private String studentNotes;
-
 	private String studentSchoolIdNumber;
 
-	@Lob
-	private String studentHealthNotes;
+//	@Lob
+//	private String studentNotes;
+//	@Lob
+//	private String studentHealthNotes;
 
-	@Lob
-	private String studentFamilyNotes;
-
+<<<<<<< HEAD
+//	@Lob
+//	private String studentFamilyNotes;
+//
+//	private Collection<Integer> studentMathScores;
+=======
 	private ArrayList<Integer> studentMathScores = new ArrayList<Integer>();
 
 	public String getStudentLastName() {
 		return studentLastName;
 	}
+>>>>>>> 8c9efc077fa70174e45f40f8966af084d4c5547d
 
 	public Student() {
 
-	}
-
-	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
-			ArrayList<Integer> studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
-		this.studentLastName = studentLastName;
-		this.studentFirstName = studentFirstName;
-		this.studentNotes = studentNotes;
-		this.studentSchoolIdNumber = studentSchoolIdNumber;
-		this.studentMathScores = studentMathScores;
-		this.studentHealthNotes = studentHealthNotes;
-		this.studentFamilyNotes = studentFamilyNotes;
 	}
 
 	// bare-minimum constructor
@@ -57,16 +48,8 @@ public class Student {
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
 	}
 
-	public ArrayList<Integer> getStudentMathScores() {
-		return (ArrayList<Integer>) studentMathScores;
-	}
-
-	public String getStudentHealthNotes() {
-		return studentHealthNotes;
-	}
-
-	public String getStudentFamilyNotes() {
-		return studentFamilyNotes;
+	public String getStudentLastName() {
+		return studentLastName;
 	}
 
 	public String getStudentFirstName() {
@@ -77,12 +60,23 @@ public class Student {
 		return studentId;
 	}
 
-	public String getStudentNotes() {
-		return studentNotes;
-	}
-
 	public String getStudentSchoolIdNumber() {
 		return studentSchoolIdNumber;
 	}
+
+//	public Collection<Integer> getStudentMathScores() {
+//		return (Collection<Integer>) studentMathScores;
+//	}
+//
+//	public String getStudentHealthNotes() {
+//		return studentHealthNotes;
+//	}
+//
+//	public String getStudentFamilyNotes() {
+//		return studentFamilyNotes;
+//	}
+//	public String getStudentNotes() {
+//		return studentNotes;
+//	}
 
 }
