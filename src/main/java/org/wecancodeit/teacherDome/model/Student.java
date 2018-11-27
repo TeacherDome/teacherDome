@@ -57,8 +57,8 @@ public class Student {
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
 	}
 
-	public int[] getStudentMathScores() {
-		return studentMathScores;
+	public ArrayList<Integer> getStudentMathScores() {
+		return (ArrayList<Integer>) studentMathScores;
 	}
 
 	public String getStudentHealthNotes() {
