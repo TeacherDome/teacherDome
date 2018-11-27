@@ -24,9 +24,8 @@ public class ApiController {
 	}
 
 	@PostMapping("/api/students/addStudent")
-	public String addStudent(String studentFirstName, String studentLastName, String studentstudentSchoolIdNumber) {
-		studentRepo.save(new StudentstudentFirstName,studentLastName, studentstudentSchoolIdNumber ));
-		return "index";
+	public void addStudent(String studentFirstName, String studentLastName, String studentstudentSchoolIdNumber) {
+		studentRepo.save(new Student(studentFirstName, studentLastName, studentstudentSchoolIdNumber));
 	}
 
 }
