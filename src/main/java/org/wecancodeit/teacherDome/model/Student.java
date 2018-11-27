@@ -31,12 +31,12 @@ public class Student {
 
 	private Collection<Integer> studentMathScores = new ArrayList<Integer>();
 
-	public Student() {
-
-	}
-
 	public String getStudentLastName() {
 		return studentLastName;
+	}
+
+	public Student() {
+
 	}
 
 	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
