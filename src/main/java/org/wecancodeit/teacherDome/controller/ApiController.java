@@ -31,7 +31,7 @@ public class ApiController {
 		String studentLastName = json.getString("studentLastName");
 		String studentSchoolIdNumber = json.getString("studentSchoolIdNumber");
 
-		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber);
+		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber, false);
 		studentRepo.save(student);
 
 	}

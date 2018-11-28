@@ -19,15 +19,15 @@ public class StudentRepositoryTest {
 
 	@Test
 	public void shouldcontainStudent() {
-		Student studentTed = studentRepo.save(new Student("Ted", "", ""));
+		Student studentTed = studentRepo.save(new Student("Ted", "", "", false));
 		Iterable<Student> result = studentRepo.findAll();
 		assertThat(result, hasItems(studentTed));
 	}
 
 	@Test
 	public void shouldContainMultipleStudents() {
-		Student studentTed = studentRepo.save(new Student("Ted", "", ""));
-		Student studentTina = studentRepo.save(new Student("Tina", "", ""));
+		Student studentTed = studentRepo.save(new Student("Ted", "", "", false));
+		Student studentTina = studentRepo.save(new Student("Tina", "", "", false));
 		Iterable<Student> result = studentRepo.findAll();
 		assertThat(result, hasItems(studentTed, studentTina));
 	}

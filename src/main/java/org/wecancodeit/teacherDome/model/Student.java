@@ -14,16 +14,19 @@ public class Student {
 	@Id
 	private Long studentId;
 	private String studentSchoolIdNumber;
+	private boolean studentIsRetired;
 
 	public Student() {
 
 	}
 
 	// bare-minimum constructor
-	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber) {
+	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber,
+			boolean studentIsRetired) {
 		this.studentFirstName = studentFirstName;
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
+		this.studentIsRetired = studentIsRetired;
 	}
 
 	public String getStudentFirstName() {
@@ -42,4 +45,7 @@ public class Student {
 		return studentSchoolIdNumber;
 	}
 
+	public boolean isStudentIsActive() {
+		return studentIsRetired;
+	}
 }
