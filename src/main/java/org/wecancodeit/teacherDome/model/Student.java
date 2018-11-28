@@ -21,12 +21,11 @@ public class Student {
 	}
 
 	// bare-minimum constructor
-	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber,
-			boolean studentIsRetired) {
+	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber) {
 		this.studentFirstName = studentFirstName;
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
-		this.studentIsRetired = studentIsRetired;
+		this.studentIsRetired = false;
 	}
 
 	public String getStudentFirstName() {
