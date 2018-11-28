@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TeacherDome/teacherDome#readme",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "proxy": "http://localhost:8080"
   }
 }

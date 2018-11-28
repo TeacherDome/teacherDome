@@ -29,7 +29,7 @@ public class Student {
 	@Lob
 	private String studentFamilyNotes;
 
-	private Collection<Integer> studentMathScores = new ArrayList<Integer>();
+	private ArrayList<Integer> studentMathScores = new ArrayList<Integer>();
 
 	public String getStudentLastName() {
 		return studentLastName;
