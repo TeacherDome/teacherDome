@@ -14,6 +14,7 @@ public class Student {
 	@Id
 	private Long studentId;
 	private String studentSchoolIdNumber;
+	private boolean studentIsRetired;
 
 	public Student() {
 
@@ -24,6 +25,7 @@ public class Student {
 		this.studentFirstName = studentFirstName;
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
+		this.studentIsRetired = false;
 	}
 
 	public String getStudentFirstName() {
@@ -42,4 +44,7 @@ public class Student {
 		return studentSchoolIdNumber;
 	}
 
+	public boolean isStudentIsActive() {
+		return studentIsRetired;
+	}
 }
