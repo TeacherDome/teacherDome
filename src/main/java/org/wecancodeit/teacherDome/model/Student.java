@@ -1,12 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
 public class Student {
@@ -17,68 +13,29 @@ public class Student {
 	@GeneratedValue
 	@Id
 	private Long studentId;
-
-	@Lob
-	private String studentNotes;
-
 	private String studentSchoolIdNumber;
-
-	@Lob
-	private String studentHealthNotes;
-
-	@Lob
-	private String studentFamilyNotes;
-
-	private ArrayList<Integer> studentMathScores = new ArrayList<Integer>();
-
-	public String getStudentLastName() {
-		return studentLastName;
-	}
 
 	public Student() {
 
 	}
 
-	public Student(String studentLastName, String studentFirstName, String studentNotes, String studentSchoolIdNumber,
-			ArrayList<Integer> studentMathScores, String studentHealthNotes, String studentFamilyNotes) {
-		this.studentLastName = studentLastName;
-		this.studentFirstName = studentFirstName;
-		this.studentNotes = studentNotes;
-		this.studentSchoolIdNumber = studentSchoolIdNumber;
-		this.studentMathScores = studentMathScores;
-		this.studentHealthNotes = studentHealthNotes;
-		this.studentFamilyNotes = studentFamilyNotes;
-	}
-
 	// bare-minimum constructor
-	public Student(String studentLastName, String studentFirstName, String studentSchoolIdNumber) {
-		this.studentLastName = studentLastName;
+	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber) {
 		this.studentFirstName = studentFirstName;
+		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
-	}
-
-	public ArrayList<Integer> getStudentMathScores() {
-		return (ArrayList<Integer>) studentMathScores;
-	}
-
-	public String getStudentHealthNotes() {
-		return studentHealthNotes;
-	}
-
-	public String getStudentFamilyNotes() {
-		return studentFamilyNotes;
 	}
 
 	public String getStudentFirstName() {
 		return studentFirstName;
 	}
 
-	public Long getStudentId() {
-		return studentId;
+	public String getStudentLastName() {
+		return studentLastName;
 	}
 
-	public String getStudentNotes() {
-		return studentNotes;
+	public Long getStudentId() {
+		return studentId;
 	}
 
 	public String getStudentSchoolIdNumber() {
