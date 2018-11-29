@@ -60,6 +60,12 @@ public class Contact {
 	public String getContactPriority() {
 		return contactPriority;
 	}
+	
+	
+	
+	public Contact() {
+	}
+	
 	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
 			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
 			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority) {
