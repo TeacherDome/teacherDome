@@ -1,8 +1,14 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 public class Contact {
@@ -70,7 +76,9 @@ public class Contact {
 		this.contactPriority = contactPriority;
 	}
 
-
+	@JsonIgnore
+	@ManyToMany
+	private Set<Student> reviews = new HashSet<>();
 	
 
 }

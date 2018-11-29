@@ -1,8 +1,14 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.swing.text.html.HTML.Tag;
+
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 public class Student {
@@ -41,5 +47,9 @@ public class Student {
 	public String getStudentSchoolIdNumber() {
 		return studentSchoolIdNumber;
 	}
+	
+	@JsonIgnore
+	@ManyToMany
+	private Set<Tag> tags;
 
 }
