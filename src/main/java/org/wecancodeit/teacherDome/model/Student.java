@@ -50,6 +50,6 @@ public class Student {
 	
 	@JsonIgnore
 	@ManyToMany
-	private Set<Tag> tags;
+	private Set<Contact> contacts;
 
 }
