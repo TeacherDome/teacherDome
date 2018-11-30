@@ -1,14 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-
-import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 public class Student {
@@ -27,11 +21,16 @@ public class Student {
 	}
 
 	// bare-minimum constructor
-	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber) {
+	public Student(String studentFirstName, String studentLastName, String studentSchoolIdNumber,
+			boolean studentIsRetired) {
 		this.studentFirstName = studentFirstName;
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
 		this.studentIsRetired = false;
+	}
+
+	public void setStudentIsRetired(boolean studentIsRetired) {
+		this.studentIsRetired = studentIsRetired;
 	}
 
 	public String getStudentFirstName() {
@@ -49,12 +48,13 @@ public class Student {
 	public String getStudentSchoolIdNumber() {
 		return studentSchoolIdNumber;
 	}
-	
-	@JsonIgnore
-	@ManyToMany
-	private Set<Contact> contacts;
 
-	public boolean isStudentIsActive() {
+	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
+
+//	@JsonIgnore
+//	@ManyToMany
+//	private Set<Contact> contacts;
+
 }
