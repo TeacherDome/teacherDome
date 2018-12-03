@@ -45,5 +45,21 @@ public class ApiController {
 		student.setStudentIsRetired(true);
 		studentRepo.save(student);
 	}
+	
+	@PostMapping("/api/students/updateStudent")
+	public void updateStudent(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentFirstName = json.getString("studentFirstName");
+		String studentLastName = json.getString("studentLastName");
+		String studentSchoolIdNumber = json.getString("studentSchoolIdNumber");
+		
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+		student.setStudentFirstName(studentFirstName);
+		student.setStudentLastName(studentLastName);
+		student.setStudentSchoolIdNumber(studentSchoolIdNumber);
+		studentRepo.save(student);
+		}
 
 }

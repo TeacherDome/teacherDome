@@ -13,6 +13,11 @@ public class Student {
 	@GeneratedValue
 	@Id
 	private Long studentId;
+	public void setStudentLastName(String studentLastName) {
+		this.studentLastName = studentLastName;
+	}
+
+
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
@@ -31,6 +36,13 @@ public class Student {
 
 	public void setStudentIsRetired(boolean studentIsRetired) {
 		this.studentIsRetired = studentIsRetired;
+	}
+	public void setStudentFirstName(String studentFirstName) {
+		this.studentFirstName = studentFirstName;
+	}
+	
+	public void setStudentSchoolIdNumber(String studentSchoolIdNumber) {
+		this.studentSchoolIdNumber = studentSchoolIdNumber;
 	}
 
 	public String getStudentFirstName() {
