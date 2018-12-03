@@ -1,5 +1,7 @@
 package org.wecancodeit.teacherDome.controller;
 
+import java.util.Collection;
+
 import javax.annotation.Resource;
 
 import org.json.JSONException;
@@ -25,7 +27,7 @@ public class ApiController {
 	}
 
 	@PostMapping("/api/students/addStudent")
-	public void addStudent(@RequestBody String body) throws JSONException {
+	public Collection<Student> addStudent(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String studentFirstName = json.getString("studentFirstName");
 		String studentLastName = json.getString("studentLastName");
@@ -33,6 +35,7 @@ public class ApiController {
 
 		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber, false);
 		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findAll();
 	}
 
 	@PostMapping("/api/students/retireStudent")
