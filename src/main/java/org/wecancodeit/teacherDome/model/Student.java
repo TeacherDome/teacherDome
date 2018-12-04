@@ -77,6 +77,14 @@ public class Student {
 	}
 
 
+	public Map<String, Integer> getMathGrades() {
+		return mathGrades;
+	}
+
+	public Map<String, Integer> getReadingGrades() {
+		return readingGrades;
+	}
+
 	public void setMathGrades(Map<String, Integer> mathGrades) {
 		this.mathGrades = mathGrades;
 	}
@@ -84,7 +92,14 @@ public class Student {
 	public void setReadingGrades(Map<String, Integer> readingGrades) {
 		this.readingGrades = readingGrades;
 	}
+
+	public void addMathGrades(String mathDate, int mathGrade) {
+		mathGrades.put(mathDate, mathGrade);
+	}
 	
+	public void addReadingGrades(String readingDate, int readingGrade) {
+		mathGrades.put(readingDate, readingGrade);
+	}
 	
 
 //	@JsonIgnore

@@ -20,7 +20,13 @@ public class StudentPopulator implements CommandLineRunner {
 		Student student3 = new Student("Mark", "Anthony", "How'd he get here", false);
 		Student student4 = new Student("Engima", "Jones", "You shouldn't be here", true);
 		
-		student1.setMathGrades("Dec 6,2018",90);
+		student1.addMathGrades("Nov 1,2018",90);
+		student1.addMathGrades("Dec 1,2018",50);
+		student1.addMathGrades("Dec 6,2018",100);
+		student1.addReadingGrades("Oct 6,2018",75);
+		student1.addReadingGrades("Dec 1,2018",70);
+		student1.addReadingGrades("Dec 6,2018",90);
+		
 		
 		student1 = studentRepo.save(student1);
 		student2 = studentRepo.save(student2);
