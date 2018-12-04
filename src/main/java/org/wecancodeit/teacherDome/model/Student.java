@@ -76,9 +76,6 @@ public class Student {
 		return studentIsRetired;
 	}
 
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
-	}
 
 	public void setMathGrades(Map<String, Integer> mathGrades) {
 		this.mathGrades = mathGrades;
