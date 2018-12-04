@@ -1,5 +1,10 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,9 +15,11 @@ public class Student {
 	private String studentLastName;
 	private String studentFirstName;
 
+
 	@GeneratedValue
 	@Id
 	private Long studentId;
+	
 	public void setStudentLastName(String studentLastName) {
 		this.studentLastName = studentLastName;
 	}
@@ -20,6 +27,9 @@ public class Student {
 
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
+	private Map<String, Integer> mathGrades = new HashMap<String, Integer>();
+
+	private Map<String, Integer> readingGrades = new HashMap<String, Integer>();
 
 	public Student() {
 
@@ -34,6 +44,7 @@ public class Student {
 		this.studentIsRetired = false;
 	}
 
+	
 	public void setStudentIsRetired(boolean studentIsRetired) {
 		this.studentIsRetired = studentIsRetired;
 	}
@@ -64,6 +75,20 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
+
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+
+	public void setMathGrades(Map<String, Integer> mathGrades) {
+		this.mathGrades = mathGrades;
+	}
+
+	public void setReadingGrades(Map<String, Integer> readingGrades) {
+		this.readingGrades = readingGrades;
+	}
+	
+	
 
 //	@JsonIgnore
 //	@ManyToMany
