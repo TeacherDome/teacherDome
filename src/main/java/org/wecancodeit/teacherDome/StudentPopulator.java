@@ -15,9 +15,9 @@ public class StudentPopulator implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Student student1 = new Student("Doe", "Jane", "Who is she?", false);
-		Student student2 = new Student("Doe", "John", "Who is HEEEEEEE?", false);
-		Student student3 = new Student("Anthony", "Mark", "How'd he get here", false);
+		Student student1 = new Student("Jane", "Doe", "Who is she?", false);
+		Student student2 = new Student("John", "Dew", "Who is HEEEEEEE?", false);
+		Student student3 = new Student("Mark", "Anthony", "How'd he get here", false);
 
 		student1 = studentRepo.save(student1);
 		student2 = studentRepo.save(student2);
