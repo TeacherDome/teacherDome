@@ -36,6 +36,7 @@ public class ApiController {
 		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber, false);
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findAll();
+
 	}
 
 	@PostMapping("/api/students/retireStudent")
