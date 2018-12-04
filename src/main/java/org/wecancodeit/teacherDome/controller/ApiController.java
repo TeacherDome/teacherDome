@@ -35,7 +35,7 @@ public class ApiController {
 
 		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber, false);
 		studentRepo.save(student);
-		return (Collection<Student>) studentRepo.findAll();
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
 
 	}
 
@@ -48,7 +48,8 @@ public class ApiController {
 		Student student = studentRepo.findById(studentIdLong).get();
 		student.setStudentIsRetired(true);
 		studentRepo.save(student);
-		return (Collection<Student>) studentRepo.findAll();
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
 	}
 
 	@PostMapping("/api/students/updateStudent")
@@ -65,7 +66,8 @@ public class ApiController {
 		student.setStudentLastName(studentLastName);
 		student.setStudentSchoolIdNumber(studentSchoolIdNumber);
 		studentRepo.save(student);
-		return (Collection<Student>) studentRepo.findAll();
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
 	}
 
 }
