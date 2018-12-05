@@ -23,8 +23,8 @@ public class ApiController {
 	StudentRepository studentRepo;
 
 	@GetMapping("/api/students")
-	public Iterable<Student> getStudents() {
-		return studentRepo.findAll();
+	public Collection<Student> getStudents() {
+		return (Collection<Student>) studentRepo.findAll();
 	}
 
 	@PutMapping("/api/student")
