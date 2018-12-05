@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Student;
@@ -22,8 +23,17 @@ public class ApiController {
 	StudentRepository studentRepo;
 
 	@GetMapping("/api/students")
-	public Iterable<Student> getStudent() {
+	public Iterable<Student> getStudents() {
 		return studentRepo.findAll();
+	}
+
+	@PutMapping("/api/student")
+	public Student getStudent(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentIdfromBody = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentIdfromBody);
+		Student student = studentRepo.findById(studentIdLong).get();
+		return student;
 	}
 
 	@PostMapping("/api/students/addStudent")
@@ -36,10 +46,9 @@ public class ApiController {
 		Student student = new Student(studentFirstName, studentLastName, studentSchoolIdNumber, false);
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
-
 	}
 
-	@PostMapping("/api/students/retireStudent")
+	@PutMapping("/api/students/retireStudent")
 	public Collection<Student> retireStudent(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String studentId = json.getString("studentId");
@@ -52,7 +61,7 @@ public class ApiController {
 
 	}
 
-	@PostMapping("/api/students/updateStudent")
+	@PutMapping("/api/students/updateStudent")
 	public Collection<Student> updateStudent(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String studentId = json.getString("studentId");
@@ -62,8 +71,54 @@ public class ApiController {
 
 		Long studentIdLong = Long.parseLong(studentId);
 		Student student = studentRepo.findById(studentIdLong).get();
+
 		student.setStudentFirstName(studentFirstName);
 		student.setStudentLastName(studentLastName);
+		student.setStudentSchoolIdNumber(studentSchoolIdNumber);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	@PutMapping("/api/students/updateStudentFirstName")
+	public Collection<Student> updateStudentFirstName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentFirstName = json.getString("studentFirstName");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentFirstName(studentFirstName);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	@PutMapping("/api/students/updateStudentLastName")
+	public Collection<Student> updateStudentLastName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentLastName = json.getString("studentLastName");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentLastName(studentLastName);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	@PutMapping("/api/students/updateStudentSchoolId")
+	public Collection<Student> updateStudentSchoolId(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentSchoolIdNumber = json.getString("studentSchoolIdNumber");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
 		student.setStudentSchoolIdNumber(studentSchoolIdNumber);
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
