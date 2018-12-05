@@ -61,9 +61,10 @@ public class TeacherResourcesControllerTest {
 		TeacherResourceLink link = new TeacherResourceLink();
 		Set<TeacherResourceLink> links = Collections.singleton(link);
 
-		given(resourceController.getResourceLinks()).willReturn(links);
-		mock.perform(get("/api/TeacherResourcePage").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].resourceLinkName", is(link.getResourceLink())));
+		given(resourceController.getResourceLink()).willReturn(links);
+		mock.perform(get("/api/TeacherResourcePage/Link").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].resourceLinkName", is(link.getResourceLinkName())));
 	}
 
 	// test that we can add a link

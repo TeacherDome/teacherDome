@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
+import org.wecancodeit.teacherDome.model.TeacherResourceLink;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceLinkRepository;
 
@@ -30,6 +31,11 @@ public class TeacherResourceApiController {
 		return teacherResourceFolderRepo.findAll();
 	}
 
+	@GetMapping("/api/TeacherResourcePage/Link")
+	public Iterable<TeacherResourceLink> getResourceLink() {
+		return teacherResourceLinkRepo.findAll();
+	}
+
 	@PostMapping("/api/TeacherResourcePage/addResourceFolder")
 	public Collection<TeacherResourceFolder> addResourceFolder(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
@@ -39,9 +45,16 @@ public class TeacherResourceApiController {
 		return (Collection<TeacherResourceFolder>) teacherResourceFolderRepo.findAll();
 	}
 
-	public Object getResourceLinks() {
-		// TODO Auto-generated method stub
-		return null;
+	@PostMapping("/api/TeacherResourcePage/addResourceLink")
+	public Collection<TeacherResourceLink> addResourceLink(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String resourceLinkName = json.getString("resourceLinkName");
+		String resourceLinkDescription = json.getString("linkDescription");
+		Long belongsToFolderId = json.getLong("linkFolderId");
+		TeacherResourceLink resourceLink = new TeacherResourceLink(resourceLinkName, resourceLinkDescription,
+				belongsToFolderId);
+		teacherResourceLinkRepo.save(resourceLink);
+		return (Collection<TeacherResourceLink>) teacherResourceLinkRepo.findAll();
 	}
 
 }

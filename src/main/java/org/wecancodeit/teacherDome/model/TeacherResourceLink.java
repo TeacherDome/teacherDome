@@ -11,7 +11,7 @@ public class TeacherResourceLink {
 	@Id
 	@GeneratedValue
 	private Long resourceLinkId;
-	private String resourceLink;
+	private String resourceLinkName;
 	private Long belongsToFolderId;
 
 	@Lob
@@ -20,8 +20,8 @@ public class TeacherResourceLink {
 	public TeacherResourceLink() {
 	}
 
-	public TeacherResourceLink(String resourceLink, String resourceLinkDescription, Long belongsToFolderId) {
-		this.resourceLink = resourceLink;
+	public TeacherResourceLink(String resourceLinkName, String resourceLinkDescription, Long belongsToFolderId) {
+		this.resourceLinkName = resourceLinkName;
 		this.resourceLinkDescription = resourceLinkDescription;
 		this.belongsToFolderId = belongsToFolderId;
 	}
@@ -30,8 +30,8 @@ public class TeacherResourceLink {
 		return resourceLinkId;
 	}
 
-	public String getResourceLink() {
-		return resourceLink;
+	public String getResourceLinkName() {
+		return resourceLinkName;
 	}
 
 	public String getResourceLinkDescription() {
