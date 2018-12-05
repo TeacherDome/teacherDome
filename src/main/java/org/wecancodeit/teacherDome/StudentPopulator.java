@@ -5,13 +5,17 @@ import javax.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.teacherDome.model.Student;
+import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
+import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
 
 @Service
 public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
 	StudentRepository studentRepo;
+	@Resource
+	TeacherResourceFolderRepository folderRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -24,6 +28,9 @@ public class StudentPopulator implements CommandLineRunner {
 		student2 = studentRepo.save(student2);
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
+		
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		teacherResourceFolder1 =  folderRepo.save(teacherResourceFolder1);
 	}
 
 }
