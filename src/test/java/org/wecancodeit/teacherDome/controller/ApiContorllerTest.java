@@ -38,7 +38,7 @@ public class ApiContorllerTest {
 
 	@Test
 	public void retrieveDetailsFromStudent() throws Exception {
-//Make a mock collection of students
+		// Make a mock collection of students
 		Collection<Student> students = Collections.singleton(mockStudent);
 		// Telling the method call what to return: IE: a collection of students with
 		// mockStudent
@@ -47,7 +47,7 @@ public class ApiContorllerTest {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students").accept(MediaType.APPLICATION_JSON);
 		// The Assert - what do we want to see?
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		// System.out.println(result.getResponse().getContentAsString());
+		System.out.println(result.getResponse().getContentAsString());
 		JSONAssert.assertEquals(exampleStudentJson, result.getResponse().getContentAsString(), false);
 	}
 

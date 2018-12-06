@@ -1,10 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Student {
@@ -15,9 +13,12 @@ public class Student {
 	private String studentFirstName;
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
-	private MathData mathGrades = new MathData();
+//	@Lob
+//	private String studentTeacherNote;
+//	@Lob
+//	private String studentFamilyNote;
+//	@Lob
+//	private String studentImportantInformation;
 
 	public Student() {
 
@@ -67,12 +68,4 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
-
-	public MathData getMathGrades() {
-		return mathGrades;
-
-//	@JsonIgnore
-//	@ManyToMany
-//	private Set<Contact> contacts;
-
 }
