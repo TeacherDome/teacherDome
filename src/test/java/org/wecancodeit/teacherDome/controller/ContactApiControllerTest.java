@@ -38,7 +38,7 @@ public class ContactApiControllerTest {
 		mvc.perform(get("/api/ContactPage")).andExpect(status().isOk());
 	}
 
-	// @Test
+	@Test
 	public void canViewAllContactsInRepo() throws Exception {
 		Contact contact1 = new Contact();
 		Set<Contact> allContacts = Collections.singleton(contact1);
@@ -46,4 +46,5 @@ public class ContactApiControllerTest {
 		mvc.perform(get("/api/ContactPage").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].contactLastName", is(contact1.getContactLastName())));
 	}
+
 }
