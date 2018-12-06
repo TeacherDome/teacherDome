@@ -2,10 +2,11 @@ package org.wecancodeit.teacherDome.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class MathData {
@@ -14,21 +15,35 @@ public class MathData {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne
+	@ManyToOne
 	private Student student;
 
-	private ArrayList<String> dates = new ArrayList<String>();
-	private ArrayList<Integer> scores = new ArrayList<Integer>();
+	private String date;
+	private int score;
 
 	public MathData() {
 
 	}
 
-	public ArrayList<String> getDates() {
-		return dates;
+	public MathData(String date, int score, Student student) {
+		this.date = date;
+		this.score = score;
+		this.student = student;
 	}
 
-	public ArrayList<Integer> getScores() {
-		return scores;
+	public Long getId() {
+		return id;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public int getScore() {
+		return score;
 	}
 }
