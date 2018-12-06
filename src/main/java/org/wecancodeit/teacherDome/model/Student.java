@@ -1,14 +1,13 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Student {
@@ -21,6 +20,7 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
 
