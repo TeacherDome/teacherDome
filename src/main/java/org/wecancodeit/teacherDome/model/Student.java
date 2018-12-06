@@ -1,6 +1,5 @@
 package org.wecancodeit.teacherDome.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,7 +8,6 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Student {
-
 	@Id
 	@GeneratedValue
 	private Long studentId;
@@ -72,7 +70,6 @@ public class Student {
 
 	public MathData getMathGrades() {
 		return mathGrades;
-	}
 
 //	@JsonIgnore
 //	@ManyToMany
