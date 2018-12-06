@@ -1,31 +1,23 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Student {
-
+	@Id
+	@GeneratedValue
+	private Long studentId;
 	private String studentLastName;
 	private String studentFirstName;
-
-	@GeneratedValue
-	@Id
-	private Long studentId;
-
-	public void setStudentLastName(String studentLastName) {
-		this.studentLastName = studentLastName;
-	}
-
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
-	private Map<String, Integer> mathGrades = new HashMap<String, Integer>();
 
-	private Map<String, Integer> readingGrades = new HashMap<String, Integer>();
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
+	private MathData mathGrades = new MathData();
 
 	public Student() {
 
@@ -46,6 +38,10 @@ public class Student {
 
 	public void setStudentFirstName(String studentFirstName) {
 		this.studentFirstName = studentFirstName;
+	}
+
+	public void setStudentLastName(String studentLastName) {
+		this.studentLastName = studentLastName;
 	}
 
 	public void setStudentSchoolIdNumber(String studentSchoolIdNumber) {
@@ -72,29 +68,8 @@ public class Student {
 		return studentIsRetired;
 	}
 
-	public Map<String, Integer> getMathGrades() {
+	public MathData getMathGrades() {
 		return mathGrades;
-	}
-
-	public Map<String, Integer> getReadingGrades() {
-		return readingGrades;
-	}
-
-	public void setMathGrades(Map<String, Integer> mathGrades) {
-		this.mathGrades = mathGrades;
-	}
-
-	public void setReadingGrades(Map<String, Integer> readingGrades) {
-		this.readingGrades = readingGrades;
-	}
-
-	public void addMathGrades(String mathDate, int mathGrade) {
-		mathGrades.put(mathDate, mathGrade);
-	}
-
-	public void addReadingGrades(String readingDate, int readingGrade) {
-		mathGrades.put(readingDate, readingGrade);
-	}
 
 //	@JsonIgnore
 //	@ManyToMany
