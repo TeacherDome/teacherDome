@@ -1,7 +1,7 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.Collection;
 
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Student {
-
 	@Id
 	@GeneratedValue
 	private Long studentId;
@@ -75,7 +74,6 @@ public class Student {
 
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
-	}
 
 	public void addMathScore(MathData score) {
 		mathGrades.add(score);
