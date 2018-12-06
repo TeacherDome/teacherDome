@@ -4,12 +4,16 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
+import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
+import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
 
 @Service
 public class StudentPopulator implements CommandLineRunner {
@@ -18,6 +22,10 @@ public class StudentPopulator implements CommandLineRunner {
 	StudentRepository studentRepo;
 	@Resource
 	TeacherResourceFolderRepository folderRepo;
+	@Resource
+	TreasuryRepository treasureRepo;
+	@Resource
+	ReceiptRepository receiptRepo;
 
 	@Resource
 	MathDataRepository mathRepo;
@@ -34,6 +42,15 @@ public class StudentPopulator implements CommandLineRunner {
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
 
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
+
+		Treasury treasury1 = new Treasury(200.00);
+		treasury1 = treasureRepo.save(treasury1);
+
+		Receipt receipt1 = new Receipt(200, "This is a change", 100);
+		receipt1 = receiptRepo.save(receipt1);
+    
 		MathData math1 = new MathData("Dec 5, 2018", 400, student1);
 		MathData math2 = new MathData("Dec 6, 2018", 500, student1);
 		MathData math3 = new MathData("Dec 7, 2018", 550, student1);
@@ -44,7 +61,5 @@ public class StudentPopulator implements CommandLineRunner {
 		
 		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
 		teacherResourceFolder1 =  folderRepo.save(teacherResourceFolder1);
-
 	}
-
 }
