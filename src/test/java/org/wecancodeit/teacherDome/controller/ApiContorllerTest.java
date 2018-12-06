@@ -1,5 +1,6 @@
 package org.wecancodeit.teacherDome.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -33,7 +34,6 @@ public class ApiContorllerTest {
 	StudentRepository studentRepo;
 
 	Student mockStudent = new Student("Mark", "Hamil", "Ab124", false);
-
 	String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}]";
 
 	@Test
@@ -47,13 +47,27 @@ public class ApiContorllerTest {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students").accept(MediaType.APPLICATION_JSON);
 		// The Assert - what do we want to see?
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		System.out.println(result.getResponse().getContentAsString());
+		// System.out.println(result.getResponse().getContentAsString());
 		JSONAssert.assertEquals(exampleStudentJson, result.getResponse().getContentAsString(), false);
 	}
-	// Can find all students
 
 	// Can add a student
+	// @Test
+	public void createNewStudent() throws Exception {
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
+		String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}, {\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Becky\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}]";
 
+		ArrayList<Student> studenten = new ArrayList<>();
+		studenten.add(mockStudent);
+		studenten.add(mockStudent2);
+		Mockito.when(apiControl.addStudent(exampleStudentJson)).thenReturn(studenten);
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students/addStudent")
+				.accept(MediaType.APPLICATION_JSON);
+		// The Assert - what do we want to see?
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		JSONAssert.assertEquals(exampleStudentJson, result.getResponse().getContentAsString(), false);
+	}
 	// Can retire a student
 
 	// Can update a student
