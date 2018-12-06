@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.teacherDome.model.Receipt;
+import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.Student;
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.Treasury;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
@@ -24,6 +26,9 @@ public class StudentPopulator implements CommandLineRunner {
 	TreasuryRepository treasureRepo;
 	@Resource
 	ReceiptRepository receiptRepo;
+
+	@Resource
+	MathDataRepository mathRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -45,6 +50,16 @@ public class StudentPopulator implements CommandLineRunner {
 
 		Receipt receipt1 = new Receipt(200, "This is a change", 100);
 		receipt1 = receiptRepo.save(receipt1);
-	}
+    
+		MathData math1 = new MathData("Dec 5, 2018", 400, student1);
+		MathData math2 = new MathData("Dec 6, 2018", 500, student1);
+		MathData math3 = new MathData("Dec 7, 2018", 550, student1);
 
+		mathRepo.save(math1);
+		mathRepo.save(math2);
+		mathRepo.save(math3);
+		
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		teacherResourceFolder1 =  folderRepo.save(teacherResourceFolder1);
+	}
 }

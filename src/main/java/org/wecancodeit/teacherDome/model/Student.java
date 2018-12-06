@@ -1,15 +1,16 @@
 package org.wecancodeit.teacherDome.model;
 
-import javax.persistence.CascadeType;
+
+import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Student {
-
 	@Id
 	@GeneratedValue
 	private Long studentId;
@@ -18,8 +19,9 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
-	private MathData mathGrades = new MathData();
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
 
 	public Student() {
 
@@ -70,8 +72,11 @@ public class Student {
 		return studentIsRetired;
 	}
 
-	public MathData getMathGrades() {
+	public Collection<MathData> getMathGrades() {
 		return mathGrades;
+
+	public void addMathScore(MathData score) {
+		mathGrades.add(score);
 	}
 
 //	@JsonIgnore
