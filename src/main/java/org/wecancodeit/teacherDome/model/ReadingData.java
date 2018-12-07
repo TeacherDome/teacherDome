@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class MathData {
+public class ReadingData {
 
 	@Id
 	@GeneratedValue
@@ -18,11 +18,11 @@ public class MathData {
 	private String date;
 	private int score;
 
-	public MathData() {
+	public ReadingData() {
 
 	}
 
-	public MathData(String date, int score, Student student) {
+	public ReadingData(String date, int score, Student student) {
 		this.date = date;
 		this.score = score;
 		this.student = student;

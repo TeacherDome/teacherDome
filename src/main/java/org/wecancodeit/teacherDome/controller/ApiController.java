@@ -12,8 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.wecancodeit.teacherDome.model.MathData;
+import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Student;
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
+import org.wecancodeit.teacherDome.model.Receipt;
+import org.wecancodeit.teacherDome.model.Student;
+import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
+import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
 
 @CrossOrigin
 @RestController
@@ -22,9 +31,31 @@ public class ApiController {
 	@Resource
 	StudentRepository studentRepo;
 
+	@Resource
+	MathDataRepository mathRepo;
+
+	@Resource
+	ReadingDataRepository readingRepo;
+  
+  @Resource
+  TreasuryRepository treasureRepo;
+
+	@Resource
+	ReceiptRepository receiptsRepo;
+
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
 		return (Collection<Student>) studentRepo.findAll();
+	}
+
+	@GetMapping("/api/math-scores")
+	public Iterable<MathData> getMathData() {
+		return mathRepo.findAll();
+	}
+
+	@GetMapping("/api/reading-scores")
+	public Iterable<ReadingData> getReadingData() {
+		return readingRepo.findAll();
 	}
 
 	@PutMapping("/api/student")
@@ -122,6 +153,61 @@ public class ApiController {
 		student.setStudentSchoolIdNumber(studentSchoolIdNumber);
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	// treasury
+	@GetMapping("/api/treasury")
+	public Collection<Treasury> getTreasury() {
+		return (Collection<Treasury>) treasureRepo.findAll();
+	}
+
+	@PostMapping("/api/treasury/updateTreasuryAdd")
+	public Collection<Treasury> updateTreasuryAdd(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String addFunds = json.getString("addFunds");
+		String comment = json.getString("addComment");
+		double fundDouble = Double.parseDouble(addFunds);
+		Long id = (long) 10;
+		Treasury treasury = treasureRepo.findById(id).get();
+		double intialFunds = treasury.getFunds();
+		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
+		receipt.setLineItem(intialFunds, comment, fundDouble, true);
+		receiptsRepo.save(receipt);
+		treasury.setFunds(intialFunds + fundDouble);
+		treasureRepo.save(treasury);
+		return (Collection<Treasury>) treasureRepo.findAll();
+
+	}
+
+	@PostMapping("/api/treasury/updateTreasurySub")
+	public Collection<Treasury> updateTreasurySubtract(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String addFunds = json.getString("addFunds");
+		String comment = json.getString("subComment");
+		double fundDouble = Double.parseDouble(addFunds);
+		Long id = (long) 10;
+		Treasury treasury = treasureRepo.findById(id).get();
+		double intialFunds = treasury.getFunds();
+		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
+		receipt.setLineItem(intialFunds, comment, fundDouble, false);
+		receiptsRepo.save(receipt);
+		treasury.setFunds(intialFunds - fundDouble);
+		treasureRepo.save(treasury);
+		return (Collection<Treasury>) treasureRepo.findAll();
+
+	}
+
+	// receipts
+	@GetMapping("/api/receipts")
+	public Collection<Receipt> getReceipts() {
+		return (Collection<Receipt>) receiptsRepo.findAll();
+	}
+
+	@PutMapping("/api/treasury/getReceipts")
+	public Collection<Receipt> getReceipts(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		return (Collection<Receipt>) receiptsRepo.findAll();
 
 	}
 
