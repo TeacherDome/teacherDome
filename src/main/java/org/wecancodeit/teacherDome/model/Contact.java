@@ -34,11 +34,9 @@ public class Contact {
 	public Contact() {
 	}
 
-	public Contact(Long contactId, String contactFirstName, String contactLastName, String contactStreet,
-			String contactCity, String contactState, String contactZipCode, String contactEmail,
-			String contactCellPhoneNumber, String contactHomePhoneNumber, String contactWorkPhoneNumber,
-			String contactPriority, Student... students) {
-		this.contactId = contactId;
+	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
+			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
+			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority, Student... students) {
 		this.contactFirstName = contactFirstName;
 		this.contactLastName = contactLastName;
 		this.contactStreet = contactStreet;
@@ -66,6 +64,58 @@ public class Contact {
 
 	public String getContactCity() {
 		return contactCity;
+	}
+
+	public void setContactId(Long contactId) {
+		this.contactId = contactId;
+	}
+
+	public void setContactFirstName(String contactFirstName) {
+		this.contactFirstName = contactFirstName;
+	}
+
+	public void setContactLastName(String contactLastName) {
+		this.contactLastName = contactLastName;
+	}
+
+	public void setContactStreet(String contactStreet) {
+		this.contactStreet = contactStreet;
+	}
+
+	public void setContactCity(String contactCity) {
+		this.contactCity = contactCity;
+	}
+
+	public void setContactState(String contactState) {
+		this.contactState = contactState;
+	}
+
+	public void setContactZipCode(String contactZipCode) {
+		this.contactZipCode = contactZipCode;
+	}
+
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+
+	public void setContactCellPhoneNumber(String contactCellPhoneNumber) {
+		this.contactCellPhoneNumber = contactCellPhoneNumber;
+	}
+
+	public void setContactHomePhoneNumber(String contactHomePhoneNumber) {
+		this.contactHomePhoneNumber = contactHomePhoneNumber;
+	}
+
+	public void setContactWorkPhoneNumber(String contactWorkPhoneNumber) {
+		this.contactWorkPhoneNumber = contactWorkPhoneNumber;
+	}
+
+	public void setContactPriority(String contactPriority) {
+		this.contactPriority = contactPriority;
+	}
+
+	public void setStudents(Collection<Student> students) {
+		this.students = students;
 	}
 
 	public String getContactState() {
@@ -100,4 +150,7 @@ public class Contact {
 		return contactId;
 	}
 
+	public Collection<Student> getStudents() {
+		return students;
+	}
 }

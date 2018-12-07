@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Contact;
@@ -29,7 +30,6 @@ public class ContactApiController {
 	@PostMapping("/api/ContactPage/addContact")
 	public Collection<Contact> addContact(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Long contactId = json.getLong("contactId");
 		String contactFirstName = json.getString("contactFirstName");
 		String contactLastName = json.getString("contactLastName");
 		String contactStreet = json.getString("contactStreet");
@@ -41,10 +41,18 @@ public class ContactApiController {
 		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
 		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
 		String contactPriority = json.getString("contactPriority");
-		Contact contact = new Contact(contactId, contactFirstName, contactLastName, contactStreet, contactCity,
-				contactState, contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber,
-				contactWorkPhoneNumber, contactPriority);
+		Contact contact = new Contact(contactFirstName, contactLastName, contactStreet, contactCity, contactState,
+				contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber, contactWorkPhoneNumber,
+				contactPriority);
 		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/updateContactFirstName")
+	public Collection<Contact> updateContactFirstName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+
+		return (Collection<Contact>) contactRepo.findAll();
+
 	}
 
 }
