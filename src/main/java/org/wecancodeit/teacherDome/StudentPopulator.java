@@ -11,13 +11,17 @@ import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
+import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
+import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
 
 @Service
 public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
 	StudentRepository studentRepo;
+	@Resource
+	TeacherResourceFolderRepository folderRepo;
 
 	@Resource
 	MathDataRepository mathRepo;
@@ -44,6 +48,9 @@ public class StudentPopulator implements CommandLineRunner {
 		mathRepo.save(new MathData("Dec 5, 2018", 400, student1));
 		mathRepo.save(math2);
 		mathRepo.save(math3);
+
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
 
 	}
 

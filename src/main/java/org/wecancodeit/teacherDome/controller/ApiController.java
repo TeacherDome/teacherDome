@@ -33,8 +33,8 @@ public class ApiController {
 	ReadingDataRepository readingRepo;
 
 	@GetMapping("/api/students")
-	public Iterable<Student> getStudents() {
-		return studentRepo.findAll();
+	public Collection<Student> getStudents() {
+		return (Collection<Student>) studentRepo.findAll();
 	}
 
 	@GetMapping("/api/math-scores")
