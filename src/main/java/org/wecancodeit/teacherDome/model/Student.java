@@ -24,6 +24,10 @@ public class Student {
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
+
 	public Student() {
 
 	}
@@ -79,6 +83,10 @@ public class Student {
 
 	public void addMathScore(MathData score) {
 		mathGrades.add(score);
+	}
+
+	public void addReadingscore(ReadingData score) {
+		readingGrades.add(score);
 	}
 
 //	@JsonIgnore

@@ -1,5 +1,8 @@
 package org.wecancodeit.teacherDome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
 @Service
@@ -17,6 +21,9 @@ public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
 	MathDataRepository mathRepo;
+
+	@Resource
+	ReadingDataRepository readingRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -30,14 +37,29 @@ public class StudentPopulator implements CommandLineRunner {
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
 
-		MathData math1 = new MathData("Dec 5, 2018", 400, student1);
+//		new MathData("Dec 5, 2018", 400, student1);
 		MathData math2 = new MathData("Dec 6, 2018", 500, student1);
 		MathData math3 = new MathData("Dec 7, 2018", 550, student1);
 
-		mathRepo.save(math1);
+		mathRepo.save(new MathData("Dec 5, 2018", 400, student1));
 		mathRepo.save(math2);
 		mathRepo.save(math3);
 
 	}
 
+	ArrayList<String> createDatesList(String[] dates) {
+		return new ArrayList<>(Arrays.asList(dates));
+	}
+
+	private ArrayList<Integer> createScoreList(Integer[] scores) {
+		return new ArrayList<>(Arrays.asList(scores));
+	}
+
+	private ArrayList<Student> createStudentList(Student[] students) {
+		return new ArrayList<Student>(Arrays.asList(students));
+	}
+
+	private void saveMathDataToRepo(String date, int score, Student student) {
+		mathRepo.save(new MathData(date, score, student));
+	}
 }
