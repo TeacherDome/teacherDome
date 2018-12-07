@@ -71,16 +71,16 @@ public class StudentPopulator implements CommandLineRunner {
 		mathRepo.save(new MathData("Week 3", 650, student2));
 		mathRepo.save(new MathData("Week 4", 780, student2));
 		readingRepo.save(new ReadingData("Yesterday", 550, student2));
-		readingRepo.save(new ReadingData("Last Night", 550, student2));
-		readingRepo.save(new ReadingData("Today", 550, student2));
+		readingRepo.save(new ReadingData("Last Night", 800, student2));
+		readingRepo.save(new ReadingData("Today", 1001, student2));
 
 		mathRepo.save(new MathData("September", 350, student3));
 		mathRepo.save(new MathData("October", 500, student3));
 		mathRepo.save(new MathData("November", 1300, student3));
 		readingRepo.save(new ReadingData("Aug", 550, student3));
-		readingRepo.save(new ReadingData("Sept", 550, student3));
-		readingRepo.save(new ReadingData("Oct", 550, student3));
-		readingRepo.save(new ReadingData("Nov", 550, student3));
+		readingRepo.save(new ReadingData("Sept", 560, student3));
+		readingRepo.save(new ReadingData("Oct", 570, student3));
+		readingRepo.save(new ReadingData("Nov", 575, student3));
 
 	}
 
