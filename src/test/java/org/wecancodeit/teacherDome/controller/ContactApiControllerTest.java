@@ -3,6 +3,7 @@ package org.wecancodeit.teacherDome.controller;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -49,9 +51,12 @@ public class ContactApiControllerTest {
 
 	@Test
 	public void canAddContactToRepo() throws Exception {
-		Contact contact2 = new Contact("Tina", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085", "abc@yahoo.com",
-				"6148888888", "", "", "Level 1");
-
+		Contact contact2 = new Contact(12L, "Tina", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085",
+				"abc@yahoo.com", "6148888888", "", "", "Level 1", null);
+		Set<Contact> allContacts = Collections.singleton(contact2);
+		given(contactApi.addContact(Mockito.anyString())).willReturn(allContacts);
+		mvc.perform(post("/api/ContactPage/addContact").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$[0].resourceLinkName", is(contact2.getContactId())));
 	}
 
 }

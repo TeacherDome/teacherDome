@@ -34,9 +34,11 @@ public class Contact {
 	public Contact() {
 	}
 
-	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
-			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
-			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority, Student... students) {
+	public Contact(Long contactId, String contactFirstName, String contactLastName, String contactStreet,
+			String contactCity, String contactState, String contactZipCode, String contactEmail,
+			String contactCellPhoneNumber, String contactHomePhoneNumber, String contactWorkPhoneNumber,
+			String contactPriority, Student... students) {
+		this.contactId = contactId;
 		this.contactFirstName = contactFirstName;
 		this.contactLastName = contactLastName;
 		this.contactStreet = contactStreet;
@@ -92,6 +94,10 @@ public class Contact {
 
 	public String getContactPriority() {
 		return contactPriority;
+	}
+
+	public Long getContactId() {
+		return contactId;
 	}
 
 }
