@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TeacherResourceLink {
@@ -16,6 +17,9 @@ public class TeacherResourceLink {
 
 	@Lob
 	private String resourceLinkDescription;
+	
+	@ManyToOne
+	private TeacherResourceFolder folder;
 
 	public TeacherResourceLink() {
 	}
