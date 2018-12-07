@@ -17,10 +17,12 @@ import org.wecancodeit.teacherDome.model.Contact;
 public class ContactRepositoryTest {
 	@Resource
 	ContactRepository contactRepo;
-	
+
 	@Test
 	public void shouldcontainContact() {
-		Contact contact1 = contactRepo.save(new Contact("t", "contactLastName", "contactStreet", "contactCity", "contactState", "contactZipCode", "contactEmail", "contactCellPhoneNumber", "contactHomePhoneNumber", "contactWorkPhoneNumber", "contactPriority"));
+		Contact contact1 = contactRepo.save(new Contact(null, "t", "contactLastName", "contactStreet", "contactCity",
+				"contactState", "contactZipCode", "contactEmail", "contactCellPhoneNumber", "contactHomePhoneNumber",
+				"contactWorkPhoneNumber", "contactPriority", null));
 		Iterable<Contact> result = contactRepo.findAll();
 		assertThat(result, hasItems(contact1));
 	}
