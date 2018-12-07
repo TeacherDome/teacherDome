@@ -49,7 +49,6 @@ public class TeacherResourcesControllerTest {
 	public void addFoldersInRepo() throws Exception {
 		TeacherResourceFolder homeWork = new TeacherResourceFolder();
 		Set<TeacherResourceFolder> folders = Collections.singleton(homeWork);
-
 		given(resourceController.getResourceFolders()).willReturn(folders);
 		mock.perform(get("/api/TeacherResourcePage").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].resourceFolderName", is(homeWork.getResourceFolderName())));
