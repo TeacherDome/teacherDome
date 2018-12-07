@@ -183,4 +183,11 @@ public class ApiController {
 		return (Collection<Receipt>) receiptsRepo.findAll();
 	}
 
+	@PutMapping("/api/treasury/getReceipts")
+	public Collection<Receipt> getReceipts(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		return (Collection<Receipt>) receiptsRepo.findAll();
+
+	}
+
 }
