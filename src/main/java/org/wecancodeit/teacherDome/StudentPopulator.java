@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.MathData;
+import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
@@ -57,33 +58,30 @@ public class StudentPopulator implements CommandLineRunner {
 
 		Receipt receipt1 = new Receipt(200, "This is a change", 100);
 		receipt1 = receiptRepo.save(receipt1);
-    //		new MathData("Dec 5, 2018", 400, student1);
-		MathData math1 = new MathData("Dec 5, 2018", 400, student1);
-		MathData math2 = new MathData("Dec 6, 2018", 500, student1);
-		MathData math3 = new MathData("Dec 7, 2018", 550, student1);
 
 		mathRepo.save(new MathData("Dec 5, 2018", 400, student1));
-		mathRepo.save(math2);
-		mathRepo.save(math3);
+		mathRepo.save(new MathData("Dec 6, 2018", 500, student1));
+		mathRepo.save(new MathData("Dec 7, 2018", 550, student1));
+		readingRepo.save(new ReadingData("Q1", 550, student1));
+		readingRepo.save(new ReadingData("Q2", 555, student1));
+		readingRepo.save(new ReadingData("Q3", 600, student1));
 
-		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
-		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
-  }
+		mathRepo.save(new MathData("Week 1", 400, student2));
+		mathRepo.save(new MathData("Week 2", 700, student2));
+		mathRepo.save(new MathData("Week 3", 650, student2));
+		mathRepo.save(new MathData("Week 4", 780, student2));
+		readingRepo.save(new ReadingData("Yesterday", 550, student2));
+		readingRepo.save(new ReadingData("Last Night", 800, student2));
+		readingRepo.save(new ReadingData("Today", 1001, student2));
 
-	ArrayList<String> createDatesList(String[] dates) {
-		return new ArrayList<>(Arrays.asList(dates));
-	}
+		mathRepo.save(new MathData("September", 350, student3));
+		mathRepo.save(new MathData("October", 500, student3));
+		mathRepo.save(new MathData("November", 1300, student3));
+		readingRepo.save(new ReadingData("Aug", 550, student3));
+		readingRepo.save(new ReadingData("Sept", 560, student3));
+		readingRepo.save(new ReadingData("Oct", 570, student3));
+		readingRepo.save(new ReadingData("Nov", 575, student3));
 
-	private ArrayList<Integer> createScoreList(Integer[] scores) {
-		return new ArrayList<>(Arrays.asList(scores));
-	}
-
-	private ArrayList<Student> createStudentList(Student[] students) {
-		return new ArrayList<Student>(Arrays.asList(students));
-	}
-
-	private void saveMathDataToRepo(String date, int score, Student student) {
-		mathRepo.save(new MathData(date, score, student));
 	}
 
 }
