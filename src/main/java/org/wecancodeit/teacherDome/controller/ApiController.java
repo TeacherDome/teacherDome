@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.wecancodeit.teacherDome.model.MathData;
+import org.wecancodeit.teacherDome.model.ReadingData;
+import org.wecancodeit.teacherDome.model.Student;
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
@@ -27,7 +32,13 @@ public class ApiController {
 	StudentRepository studentRepo;
 
 	@Resource
-	TreasuryRepository treasureRepo;
+	MathDataRepository mathRepo;
+
+	@Resource
+	ReadingDataRepository readingRepo;
+  
+  @Resource
+  TreasuryRepository treasureRepo;
 
 	@Resource
 	ReceiptRepository receiptsRepo;
@@ -35,6 +46,16 @@ public class ApiController {
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
 		return (Collection<Student>) studentRepo.findAll();
+	}
+
+	@GetMapping("/api/math-scores")
+	public Iterable<MathData> getMathData() {
+		return mathRepo.findAll();
+	}
+
+	@GetMapping("/api/reading-scores")
+	public Iterable<ReadingData> getReadingData() {
+		return readingRepo.findAll();
 	}
 
 	@PutMapping("/api/student")

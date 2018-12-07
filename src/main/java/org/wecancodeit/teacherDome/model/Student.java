@@ -1,6 +1,5 @@
 package org.wecancodeit.teacherDome.model;
 
-
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +21,10 @@ public class Student {
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
 
 	public Student() {
 
@@ -74,9 +77,14 @@ public class Student {
 
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
+	}
 
 	public void addMathScore(MathData score) {
 		mathGrades.add(score);
+	}
+
+	public void addReadingscore(ReadingData score) {
+		readingGrades.add(score);
 	}
 
 //	@JsonIgnore
