@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Contact;
@@ -29,7 +30,6 @@ public class ContactApiController {
 	@PostMapping("/api/ContactPage/addContact")
 	public Collection<Contact> addContact(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Long contactId = json.getLong("contactId");
 		String contactFirstName = json.getString("contactFirstName");
 		String contactLastName = json.getString("contactLastName");
 		String contactStreet = json.getString("contactStreet");
@@ -41,9 +41,163 @@ public class ContactApiController {
 		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
 		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
 		String contactPriority = json.getString("contactPriority");
-		Contact contact = new Contact(contactId, contactFirstName, contactLastName, contactStreet, contactCity,
-				contactState, contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber,
-				contactWorkPhoneNumber, contactPriority);
+		Contact contact = new Contact(contactFirstName, contactLastName, contactStreet, contactCity, contactState,
+				contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber, contactWorkPhoneNumber,
+				contactPriority);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/updateContactFirstName")
+	public Collection<Contact> updateContactFirstName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactFirstName = json.getString("contactFirstName");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactFirstName);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactLastName")
+	public Collection<Contact> updateContactLastName(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactLastName = json.getString("contactLastName");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactLastName);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactStreet")
+	public Collection<Contact> updateContactStreet(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactStreet = json.getString("contactStreet");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactStreet);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactCity")
+	public Collection<Contact> updateContactCity(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactCity = json.getString("contactCity");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactCity);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactState")
+	public Collection<Contact> updateContactState(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactState = json.getString("contactState");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactState);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactZipCode")
+	public Collection<Contact> updateContactZipCode(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactZipCode = json.getString("contactZipCode");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactZipCode);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactEmail")
+	public Collection<Contact> updateContactEmail(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactEmail = json.getString("contactEmail");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactEmail);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactCellPhoneNumber")
+	public Collection<Contact> updateContactCellPhoneNumber(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactCellPhoneNumber = json.getString("contactCellPhoneNumber");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactCellPhoneNumber);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactHomePhoneNumber")
+	public Collection<Contact> updateContactHomePhoneNumber(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactHomePhoneNumber);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactWorkPhoneNumber")
+	public Collection<Contact> updateContactWorkPhoneNumber(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactWorkPhoneNumber);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactPriority")
+	public Collection<Contact> updateContactPriority(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactPriority = json.getString("contactPriority");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactFirstName(contactPriority);
+		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
 
