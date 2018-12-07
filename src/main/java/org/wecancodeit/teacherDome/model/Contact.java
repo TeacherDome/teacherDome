@@ -1,7 +1,6 @@
 package org.wecancodeit.teacherDome.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +26,29 @@ public class Contact {
 	private String contactHomePhoneNumber;
 	private String contactWorkPhoneNumber;
 	private String contactPriority;
+
+	@JsonIgnore
+	@ManyToMany
+	private Collection<Student> students;
+
+	public Contact() {
+	}
+
+	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
+			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
+			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority, Student... students) {
+		this.contactFirstName = contactFirstName;
+		this.contactLastName = contactLastName;
+		this.contactStreet = contactStreet;
+		this.contactCity = contactCity;
+		this.contactState = contactState;
+		this.contactZipCode = contactZipCode;
+		this.contactEmail = contactEmail;
+		this.contactCellPhoneNumber = contactCellPhoneNumber;
+		this.contactHomePhoneNumber = contactHomePhoneNumber;
+		this.contactWorkPhoneNumber = contactWorkPhoneNumber;
+		this.contactPriority = contactPriority;
+	}
 
 	public String getContactFirstName() {
 		return contactFirstName;
@@ -71,28 +93,5 @@ public class Contact {
 	public String getContactPriority() {
 		return contactPriority;
 	}
-
-	public Contact() {
-	}
-
-	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
-			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
-			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority) {
-		this.contactFirstName = contactFirstName;
-		this.contactLastName = contactLastName;
-		this.contactStreet = contactStreet;
-		this.contactCity = contactCity;
-		this.contactState = contactState;
-		this.contactZipCode = contactZipCode;
-		this.contactEmail = contactEmail;
-		this.contactCellPhoneNumber = contactCellPhoneNumber;
-		this.contactHomePhoneNumber = contactHomePhoneNumber;
-		this.contactWorkPhoneNumber = contactWorkPhoneNumber;
-		this.contactPriority = contactPriority;
-	}
-
-	@JsonIgnore
-	@ManyToMany
-	private Set<Student> reviews = new HashSet<>();
 
 }

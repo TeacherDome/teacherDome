@@ -52,7 +52,7 @@ public class ApiContorllerTest {
 	}
 
 	// Can add a student
-	// @Test
+	@Test
 	public void createNewStudent() throws Exception {
 		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 		String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}, {\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Becky\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}]";
@@ -62,7 +62,7 @@ public class ApiContorllerTest {
 		studenten.add(mockStudent2);
 		Mockito.when(apiControl.addStudent(exampleStudentJson)).thenReturn(studenten);
 
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students/addStudent")
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/students/addStudent")
 				.accept(MediaType.APPLICATION_JSON);
 		// The Assert - what do we want to see?
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();

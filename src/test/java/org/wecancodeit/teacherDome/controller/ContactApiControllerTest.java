@@ -47,4 +47,11 @@ public class ContactApiControllerTest {
 				.andExpect(jsonPath("$[0].contactLastName", is(contact1.getContactLastName())));
 	}
 
+	@Test
+	public void canAddContactToRepo() throws Exception {
+		Contact contact2 = new Contact("Tina", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085", "abc@yahoo.com",
+				"6148888888", "", "", "Level 1");
+
+	}
+
 }

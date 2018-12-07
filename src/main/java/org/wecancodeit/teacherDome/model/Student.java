@@ -1,8 +1,11 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Student {
@@ -13,6 +16,10 @@ public class Student {
 	private String studentFirstName;
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
+
+	@ManyToMany
+	private Collection<Contact> contacts;
+
 //	@Lob
 //	private String studentTeacherNote;
 //	@Lob
