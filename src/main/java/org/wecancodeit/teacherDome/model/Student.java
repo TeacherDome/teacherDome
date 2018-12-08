@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Student {
@@ -17,15 +20,23 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-	@ManyToMany(mappedBy = "students")
-	private Collection<Contact> contacts;
-
 //	@Lob
 //	private String studentTeacherNote;
 //	@Lob
 //	private String studentFamilyNote;
 //	@Lob
 //	private String studentImportantInformation;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
+
+	@ManyToMany(mappedBy = "students")
+	private Collection<Contact> contacts;
 
 	public Student() {
 
@@ -75,4 +86,21 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
+
+	public Collection<MathData> getMathGrades() {
+		return mathGrades;
+	}
+
+	public void addMathScore(MathData score) {
+		mathGrades.add(score);
+	}
+
+	public void addReadingscore(ReadingData score) {
+		readingGrades.add(score);
+	}
+
+//	@JsonIgnore
+//	@ManyToMany
+//	private Set<Contact> contacts;
+
 }
