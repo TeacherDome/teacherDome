@@ -1,6 +1,7 @@
 package org.wecancodeit.teacherDome.repositories;
 
 import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import javax.annotation.Resource;
@@ -25,6 +26,18 @@ public class ContactRepositoryTest {
 				"contactWorkPhoneNumber", "contactPriority", null));
 		Iterable<Contact> result = contactRepo.findAll();
 		assertThat(result, hasItems(contact1));
+	}
+
+	@Test
+	public void insertTest() {
+		final Long contactId = 12L;
+		Contact contact = new Contact();
+		contact.setContactId(contactId);
+
+		contactRepo.save(contact);
+
+		Contact dbContact = contactRepo.findOne(contact.getContactId());
+		assertNotNull(dbContact);
 	}
 
 }

@@ -5,4 +5,6 @@ import org.wecancodeit.teacherDome.model.Contact;
 
 public interface ContactRepository extends CrudRepository<Contact, Long> {
 
+	Contact findByContactId(Long contactId);
+
 }

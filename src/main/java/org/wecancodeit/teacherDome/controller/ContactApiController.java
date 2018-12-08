@@ -41,6 +41,7 @@ public class ContactApiController {
 		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
 		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
 		String contactPriority = json.getString("contactPriority");
+		String contactStudents = json.getString("contactStudents");
 		Contact contact = new Contact(contactFirstName, contactLastName, contactStreet, contactCity, contactState,
 				contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber, contactWorkPhoneNumber,
 				contactPriority);

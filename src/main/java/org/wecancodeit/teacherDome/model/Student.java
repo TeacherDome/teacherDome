@@ -17,7 +17,7 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "students")
 	private Collection<Contact> contacts;
 
 //	@Lob
