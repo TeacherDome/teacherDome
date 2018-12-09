@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
-import org.wecancodeit.teacherDome.model.Student;
-import org.wecancodeit.teacherDome.repositories.MathDataRepository;
-import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.repositories.ContactRepository;
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
@@ -36,12 +37,15 @@ public class ApiController {
 
 	@Resource
 	ReadingDataRepository readingRepo;
-  
-  @Resource
-  TreasuryRepository treasureRepo;
+
+	@Resource
+	TreasuryRepository treasureRepo;
 
 	@Resource
 	ReceiptRepository receiptsRepo;
+
+	@Resource
+	ContactRepository contactRepo;
 
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
@@ -78,6 +82,8 @@ public class ApiController {
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
 	}
+
+	@RequestMapping("/api/ContactPage/{contactId}")
 
 	@PutMapping("/api/students/retireStudent")
 	public Collection<Student> retireStudent(@RequestBody String body) throws JSONException {
