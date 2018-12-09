@@ -7,14 +7,20 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-import org.wecancodeit.teacherDome.model.Receipt;
+
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
+import org.wecancodeit.teacherDome.model.Receipt;
+
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.Treasury;
+
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
+
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;

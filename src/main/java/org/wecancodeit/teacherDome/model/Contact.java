@@ -1,6 +1,8 @@
 package org.wecancodeit.teacherDome.model;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +50,11 @@ public class Contact {
 		this.contactHomePhoneNumber = contactHomePhoneNumber;
 		this.contactWorkPhoneNumber = contactWorkPhoneNumber;
 		this.contactPriority = contactPriority;
+		this.students = new HashSet<>(Arrays.asList(students));
+	}
+
+	public Long getContactId() {
+		return contactId;
 	}
 
 	public String getContactFirstName() {
@@ -64,6 +71,34 @@ public class Contact {
 
 	public String getContactCity() {
 		return contactCity;
+	}
+
+	public String getContactState() {
+		return contactState;
+	}
+
+	public String getContactZipCode() {
+		return contactZipCode;
+	}
+
+	public String getContactEmail() {
+		return contactEmail;
+	}
+
+	public String getContactCellPhoneNumber() {
+		return contactCellPhoneNumber;
+	}
+
+	public String getContactHomePhoneNumber() {
+		return contactHomePhoneNumber;
+	}
+
+	public String getContactWorkPhoneNumber() {
+		return contactWorkPhoneNumber;
+	}
+
+	public String getContactPriority() {
+		return contactPriority;
 	}
 
 	public void setContactId(Long contactId) {
@@ -118,39 +153,33 @@ public class Contact {
 		this.students = students;
 	}
 
-	public String getContactState() {
-		return contactState;
-	}
-
-	public String getContactZipCode() {
-		return contactZipCode;
-	}
-
-	public String getContactEmail() {
-		return contactEmail;
-	}
-
-	public String getContactCellPhoneNumber() {
-		return contactCellPhoneNumber;
-	}
-
-	public String getContactHomePhoneNumber() {
-		return contactHomePhoneNumber;
-	}
-
-	public String getContactWorkPhoneNumber() {
-		return contactWorkPhoneNumber;
-	}
-
-	public String getContactPriority() {
-		return contactPriority;
-	}
-
-	public Long getContactId() {
-		return contactId;
-	}
-
 	public Collection<Student> getStudents() {
 		return students;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((contactId == null) ? 0 : contactId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		if (contactId == null) {
+			if (other.contactId != null)
+				return false;
+		} else if (!contactId.equals(other.contactId))
+			return false;
+		return true;
+	}
+
 }
