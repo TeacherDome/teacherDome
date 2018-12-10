@@ -176,8 +176,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("addComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, true);
@@ -194,8 +193,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("subComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, false);
