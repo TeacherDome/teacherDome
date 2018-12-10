@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Contact;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
+import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
 @CrossOrigin
 @RestController
@@ -22,6 +23,9 @@ public class ContactApiController {
 
 	@Resource
 	ContactRepository contactRepo;
+
+	@Resource
+	StudentRepository studentRepo;
 
 	@GetMapping("/api/Contacts")
 	public Collection<Contact> getContacts() {
@@ -220,10 +224,12 @@ public class ContactApiController {
 		return (Collection<Contact>) contactRepo.findAll();
 	}
 
-	@GetMapping("/api/ContactsById")
+	@PutMapping("/api/ContactsById")
 	public Collection<Contact> getContactsUsingId(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		String contactId = json.getString("contactId");
+		String studentId = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentId);
+		return studentRepo.findById(studentIdLong).get().getContacts();
 
 	}
 

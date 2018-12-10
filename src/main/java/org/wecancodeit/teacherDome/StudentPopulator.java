@@ -86,7 +86,7 @@ public class StudentPopulator implements CommandLineRunner {
 
 		contactRepo.save(new Contact("Bobby", "Fay", "dad", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student1));
-		contactRepo.save(new Contact("Bobby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
+		contactRepo.save(new Contact("Abby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
 		contactRepo.save(new Contact("Abby", "Schmoe", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
