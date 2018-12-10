@@ -157,12 +157,13 @@ public class ApiController {
 
 	}
 
-	@PostMapping("/api/student/{id}/add-score")
-	public Iterable<MathData> addMathScore(@RequestBody String body, @PathVariable(value = "id") Long id)
-			throws JSONException {
+	@PostMapping("/api/student/add-score")
+	public Iterable<MathData> addMathScore(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String date = json.getString("date");
 		int score = json.getInt("score");
+		String studentId = json.getString("studentId");
+		Long id = Long.parseLong(studentId);
 		Student studentForThisScore = studentRepo.findById(id).get();
 
 		mathRepo.save(new MathData(date, score, studentForThisScore));
