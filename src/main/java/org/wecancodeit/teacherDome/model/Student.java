@@ -56,6 +56,38 @@ public class Student {
 		this.studentIsRetired = false;
 	}
 
+	public String getStudentDateOfBirth() {
+		return studentDateOfBirth;
+	}
+
+	public void setStudentDateOfBirth(String studentDateOfBirth) {
+		this.studentDateOfBirth = studentDateOfBirth;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public void setStudentHealthNotes(String studentHealthNotes) {
+		this.studentHealthNotes = studentHealthNotes;
+	}
+
+	public String getStudentProgressNotes() {
+		return studentProgressNotes;
+	}
+
+	public void setStudentProgressNotes(String studentProgressNotes) {
+		this.studentProgressNotes = studentProgressNotes;
+	}
+
+	public String getStudentComments() {
+		return studentComments;
+	}
+
+	public void setStudentComments(String studentComments) {
+		this.studentComments = studentComments;
+	}
+
 	public void setStudentIsRetired(boolean studentIsRetired) {
 		this.studentIsRetired = studentIsRetired;
 	}
