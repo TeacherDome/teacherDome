@@ -4,6 +4,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -22,12 +23,17 @@ public class Student {
 	@ManyToMany
 	private Collection<Contact> contacts;
 
-//	@Lob
-//	private String studentTeacherNote;
-//	@Lob
-//	private String studentFamilyNote;
-//	@Lob
-//	private String studentImportantInformation;
+	private String studentDateOfBirth;
+
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentProgressNotes;
+
+	@Lob
+	private String studentComments;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
@@ -84,7 +90,7 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
-  
+
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
 	}
