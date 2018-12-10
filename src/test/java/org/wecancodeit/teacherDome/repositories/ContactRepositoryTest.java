@@ -20,7 +20,7 @@ public class ContactRepositoryTest {
 
 	@Test
 	public void shouldcontainContact() {
-		Contact contact1 = contactRepo.save(new Contact(null, "t", "contactLastName", "contactStreet", "contactCity",
+		Contact contact1 = contactRepo.save(new Contact("t", "contactLastName", "contactStreet", "contactCity",
 				"contactState", "contactZipCode", "contactEmail", "contactCellPhoneNumber", "contactHomePhoneNumber",
 				"contactWorkPhoneNumber", "contactPriority", null));
 		Iterable<Contact> result = contactRepo.findAll();

@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.wecancodeit.teacherDome.model.Contact;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
+import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ContactApiController.class)
@@ -39,7 +40,10 @@ public class ContactApiControllerTest {
 	@MockBean
 	ContactApiController contactApi;
 
-	Contact mockStudent = new Contact(13L, "Bobby", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085",
+	@MockBean
+	StudentRepository studentRepo;
+
+	Contact mockContact = new Contact("Bobby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 			"abc@yahoo.com", "6148888888", "", "", "Level 1");
 	String exampleContactJson = "[{\"contactId\":\"13\", \"contactFirstName\":\"Bobby\", \"contactLastName\":\"Fay\", \"contactStreet\":\"123 Abc Street\", \"contactCity\":\"Worthington\", \"contactState\":\"Ohio\", \"contactZipCode\":\"43085\", \"contactEmail\":\"abc@yahool.com\", \"contactCellPhoneNumber\":\"6148888888\", \"contactHomePhoneNumber\":\"\", \"contactWorkPhoneNumber\":\"\", \"conatctPriority\":\"Level 1\"}]";
 
@@ -59,7 +63,7 @@ public class ContactApiControllerTest {
 
 	@Test
 	public void canAddContactToRepo() throws Exception {
-		Contact contact2 = new Contact(12L, "Tina", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085",
+		Contact contact2 = new Contact("Tina", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "", "", "Level 1");
 		Mockito.when(contactRepo.save(Mockito.any(Contact.class))).thenReturn(contact2);
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/ContactPage/addContact")
@@ -69,6 +73,11 @@ public class ContactApiControllerTest {
 
 		// Assert that you get a 2xx level response
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
+
+	@Test
+	public void canUpdateContactFirstName() throws Exception {
+
 	}
 
 }
