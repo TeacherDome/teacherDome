@@ -19,9 +19,6 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-	@ManyToMany
-	private Collection<Contact> contacts;
-
 //	@Lob
 //	private String studentTeacherNote;
 //	@Lob
@@ -35,6 +32,17 @@ public class Student {
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<ReadingData> readingGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
+
+	@ManyToMany(mappedBy = "students")
+	private Collection<Contact> contacts;
 
 	public Student() {
 
@@ -97,8 +105,33 @@ public class Student {
 		readingGrades.add(score);
 	}
 
-//	@JsonIgnore
-//	@ManyToMany
-//	private Set<Contact> contacts;
+	public Collection<Contact> getContacts() {
+		return contacts;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		} else if (!studentId.equals(other.studentId))
+			return false;
+		return true;
+	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,6 +42,9 @@ public class ContactApiController {
 		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
 		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
 		String contactPriority = json.getString("contactPriority");
+		String contactStudents = json.getString("contactStudents");
+		JSONArray studentsArray = json.getJSONArray("studentsArray");
+
 		Contact contact = new Contact(contactFirstName, contactLastName, contactStreet, contactCity, contactState,
 				contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber, contactWorkPhoneNumber,
 				contactPriority);
