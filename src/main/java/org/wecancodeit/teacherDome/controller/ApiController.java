@@ -149,6 +149,21 @@ public class ApiController {
 
 	}
 
+	@PutMapping("/api/students/updateStudentDateofBirth")
+	public Collection<Student> updateStudentDateofBirth(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentDateOfBirth = json.getString("studentDateOfBirth");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentDateOfBirth(studentDateOfBirth);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
 	@PutMapping("/api/students/updateStudentSchoolId")
 	public Collection<Student> updateStudentSchoolId(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
@@ -164,6 +179,49 @@ public class ApiController {
 
 	}
 
+	@PutMapping("/api/students/updateStudentHealthNotes")
+	public Collection<Student> updateStudentHealthNotes(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentHealthNotes = json.getString("studentHealthNotes");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentHealthNotes(studentHealthNotes);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	@PutMapping("/api/students/updateStudentProgress")
+	public Collection<Student> updateStudentProgress(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentProgressNotes = json.getString("studentProgressNotes");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentProgressNotes(studentProgressNotes);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+	}
+
+	@PutMapping("/api/students/updateStudentComments")
+	public Collection<Student> updateStudentComments(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentComments = json.getString("studentComments");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentComments(studentComments);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+	}
+
 	// treasury
 	@GetMapping("/api/treasury")
 	public Collection<Treasury> getTreasury() {
@@ -176,8 +234,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("addComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, true);
@@ -194,8 +251,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("subComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, false);

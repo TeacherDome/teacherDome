@@ -7,8 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class Treasury {
 	@Id
-	@GeneratedValue
-	private Long treasuryId;
+	private Long treasuryId = (long) 111;
 
 	private double funds;
 
@@ -37,6 +36,10 @@ public class Treasury {
 
 	public double getFunds() {
 		return funds;
+	}
+
+	public Long getTreasuryId() {
+		return treasuryId;
 	}
 
 	public String getComment() {
