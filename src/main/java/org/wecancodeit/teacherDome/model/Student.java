@@ -1,9 +1,11 @@
 package org.wecancodeit.teacherDome.model;
 
 import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -19,19 +21,16 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-//	@Lob
-//	private String studentTeacherNote;
-//	@Lob
-//	private String studentFamilyNote;
-//	@Lob
-//	private String studentImportantInformation;
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	public Collection<MathData> mathGrades;
+	private String studentDateOfBirth;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	public Collection<ReadingData> readingGrades;
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentProgressNotes;
+
+	@Lob
+	private String studentComments;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
@@ -92,7 +91,7 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
-  
+
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
 	}
