@@ -1,26 +1,19 @@
 package org.wecancodeit.teacherDome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-
+import org.wecancodeit.teacherDome.model.Contact;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Receipt;
-
 import org.wecancodeit.teacherDome.model.Student;
-import org.wecancodeit.teacherDome.repositories.MathDataRepository;
-import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.Treasury;
-
+import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
-
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
@@ -43,6 +36,9 @@ public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
 	ReadingDataRepository readingRepo;
+
+	@Resource
+	ContactRepository contactRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -87,6 +83,13 @@ public class StudentPopulator implements CommandLineRunner {
 		readingRepo.save(new ReadingData("Sept", 560, student3));
 		readingRepo.save(new ReadingData("Oct", 570, student3));
 		readingRepo.save(new ReadingData("Nov", 575, student3));
+
+		contactRepo.save(new Contact("Bobby", "Fay", "dad", "123 Abc Street", "Worthington", "Ohio", "43085",
+				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student1));
+		contactRepo.save(new Contact("Abby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
+				"abc@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
+		contactRepo.save(new Contact("Abby", "Schmoe", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
+				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
 
 	}
 
