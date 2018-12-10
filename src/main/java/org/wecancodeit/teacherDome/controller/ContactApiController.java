@@ -23,7 +23,7 @@ public class ContactApiController {
 	@Resource
 	ContactRepository contactRepo;
 
-	@GetMapping("/api/ContactPage")
+	@GetMapping("/api/Contacts")
 	public Collection<Contact> getContacts() {
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -218,6 +218,13 @@ public class ContactApiController {
 		contact.setContactPriority(contactPriority);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@GetMapping("/api/ContactsById")
+	public Collection<Contact> getContactsUsingId(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+
 	}
 
 }

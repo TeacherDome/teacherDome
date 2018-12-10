@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import net.minidev.json.annotate.JsonIgnore;
-
 @Entity
 public class Contact {
 
@@ -30,7 +28,6 @@ public class Contact {
 	private String contactWorkPhoneNumber;
 	private String contactPriority;
 
-	@JsonIgnore
 	@ManyToMany
 	private Collection<Student> students;
 
