@@ -33,6 +33,7 @@ public class ContactApiController {
 		JSONObject json = new JSONObject(body);
 		String contactFirstName = json.getString("contactFirstName");
 		String contactLastName = json.getString("contactLastName");
+		String contactRelationship = json.getString("contactRelationship");
 		String contactStreet = json.getString("contactStreet");
 		String contactCity = json.getString("contactCity");
 		String contactState = json.getString("contactState");
@@ -45,9 +46,9 @@ public class ContactApiController {
 		String contactStudents = json.getString("contactStudents");
 		JSONArray studentsArray = json.getJSONArray("studentsArray");
 
-		Contact contact = new Contact(contactFirstName, contactLastName, contactStreet, contactCity, contactState,
-				contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber, contactWorkPhoneNumber,
-				contactPriority);
+		Contact contact = new Contact(contactFirstName, contactLastName, contactRelationship, contactStreet,
+				contactCity, contactState, contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber,
+				contactWorkPhoneNumber, contactPriority);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
 
@@ -74,7 +75,21 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactLastName);
+		contact.setContactLastName(contactLastName);
+		contactRepo.save(contact);
+		return (Collection<Contact>) contactRepo.findAll();
+	}
+
+	@PutMapping("/api/ContactPage/UpdateContactRelationship")
+	public Collection<Contact> updateContactRelationship(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String contactId = json.getString("contactId");
+		String contactRelationship = json.getString("contactRelationship");
+
+		Long contactIdLong = Long.parseLong(contactId);
+		Contact contact = contactRepo.findById(contactIdLong).get();
+
+		contact.setContactRelationship(contactRelationship);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -88,7 +103,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactStreet);
+		contact.setContactStreet(contactStreet);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -102,7 +117,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactCity);
+		contact.setContactCity(contactCity);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -116,7 +131,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactState);
+		contact.setContactState(contactState);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -130,7 +145,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactZipCode);
+		contact.setContactZipCode(contactZipCode);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -144,7 +159,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactEmail);
+		contact.setContactEmail(contactEmail);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -158,7 +173,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactCellPhoneNumber);
+		contact.setContactCellPhoneNumber(contactCellPhoneNumber);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -172,7 +187,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactHomePhoneNumber);
+		contact.setContactHomePhoneNumber(contactHomePhoneNumber);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -186,7 +201,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactWorkPhoneNumber);
+		contact.setContactWorkPhoneNumber(contactWorkPhoneNumber);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
@@ -200,7 +215,7 @@ public class ContactApiController {
 		Long contactIdLong = Long.parseLong(contactId);
 		Contact contact = contactRepo.findById(contactIdLong).get();
 
-		contact.setContactFirstName(contactPriority);
+		contact.setContactPriority(contactPriority);
 		contactRepo.save(contact);
 		return (Collection<Contact>) contactRepo.findAll();
 	}
