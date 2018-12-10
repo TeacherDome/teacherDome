@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import net.minidev.json.annotate.JsonIgnore;
-
 @Entity
 public class Contact {
 
@@ -19,6 +17,7 @@ public class Contact {
 	private Long contactId;
 	private String contactFirstName;
 	private String contactLastName;
+	private String contactRelationship;
 	private String contactStreet;
 	private String contactCity;
 	private String contactState;
@@ -29,18 +28,19 @@ public class Contact {
 	private String contactWorkPhoneNumber;
 	private String contactPriority;
 
-	@JsonIgnore
 	@ManyToMany
 	private Collection<Student> students;
 
 	public Contact() {
 	}
 
-	public Contact(String contactFirstName, String contactLastName, String contactStreet, String contactCity,
-			String contactState, String contactZipCode, String contactEmail, String contactCellPhoneNumber,
-			String contactHomePhoneNumber, String contactWorkPhoneNumber, String contactPriority, Student... students) {
+	public Contact(String contactFirstName, String contactLastName, String contactRelationship, String contactStreet,
+			String contactCity, String contactState, String contactZipCode, String contactEmail,
+			String contactCellPhoneNumber, String contactHomePhoneNumber, String contactWorkPhoneNumber,
+			String contactPriority, Student... students) {
 		this.contactFirstName = contactFirstName;
 		this.contactLastName = contactLastName;
+		this.contactRelationship = contactRelationship;
 		this.contactStreet = contactStreet;
 		this.contactCity = contactCity;
 		this.contactState = contactState;
@@ -63,6 +63,10 @@ public class Contact {
 
 	public String getContactLastName() {
 		return contactLastName;
+	}
+
+	public String getContactRelationship() {
+		return contactRelationship;
 	}
 
 	public String getContactStreet() {
@@ -111,6 +115,10 @@ public class Contact {
 
 	public void setContactLastName(String contactLastName) {
 		this.contactLastName = contactLastName;
+	}
+
+	public void setContactRelationship(String contactRelationship) {
+		this.contactRelationship = contactRelationship;
 	}
 
 	public void setContactStreet(String contactStreet) {

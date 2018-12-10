@@ -34,7 +34,7 @@ public class ContactStudentRelationshipTest {
 	public void shouldContainContactsForStudent() {
 		Student testStudent = new Student("Molly", "Brown", "123ff", false);
 		studentRepo.save(testStudent);
-		Contact testContact = new Contact("Bobby", "Fay", "123 Abc Street", "Worthington", "Ohio", "43085",
+		Contact testContact = new Contact("Bobby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "", "", "1", testStudent);
 		contactRepo.save(testContact);
 		Long studentId = testStudent.getStudentId();
