@@ -33,6 +33,14 @@ public class Student {
 	private String studentComments;
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
+
+	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
 	private Collection<Contact> contacts;
 
