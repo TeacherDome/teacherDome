@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -270,6 +271,20 @@ public class ApiController {
 		JSONObject json = new JSONObject(body);
 		return (Collection<Receipt>) receiptsRepo.findAll();
 
+	}
+
+	@PostMapping("/api/student/add-score")
+	public Iterable<MathData> addMathScore(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String date = json.getString("date");
+		int score = json.getInt("score");
+		String studentId = json.getString("studentId");
+		Long id = Long.parseLong(studentId);
+		Student studentForThisScore = studentRepo.findById(id).get();
+
+		mathRepo.save(new MathData(date, score, studentForThisScore));
+
+		return mathRepo.findAll();
 	}
 
 }

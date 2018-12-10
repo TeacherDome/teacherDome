@@ -33,6 +33,14 @@ public class Student {
 	private String studentComments;
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
+
+	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
 	private Collection<Contact> contacts;
 
@@ -119,6 +127,10 @@ public class Student {
 
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
+	}
+
+	public Collection<ReadingData> getReadingGrades() {
+		return readingGrades;
 	}
 
 	public void addMathScore(MathData score) {
