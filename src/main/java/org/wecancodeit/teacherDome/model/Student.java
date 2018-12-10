@@ -1,7 +1,6 @@
 package org.wecancodeit.teacherDome.model;
 
 import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,6 +25,13 @@ public class Student {
 //	private String studentFamilyNote;
 //	@Lob
 //	private String studentImportantInformation;
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<MathData> mathGrades;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	public Collection<ReadingData> readingGrades;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
@@ -86,7 +92,7 @@ public class Student {
 	public boolean isStudentIsRetired() {
 		return studentIsRetired;
 	}
-
+  
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
 	}
