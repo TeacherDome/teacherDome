@@ -48,7 +48,7 @@ public class StudentPopulator implements CommandLineRunner {
 	AssignmentRepository assignRepo;
 
 	@Resource
-	RubricElementRepository rERepo;
+	RubricElementRepository gradeRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -103,6 +103,9 @@ public class StudentPopulator implements CommandLineRunner {
 
 		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
 		assignment1 = assignRepo.save(assignment1);
+
+		RubricElement grade = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
+		grade = gradeRepo.save(grade);
 	}
 
 }

@@ -27,6 +27,13 @@ public class RubricElement {
 		this.fullGrade = fullGrade;
 	}
 
+	public RubricElement(String criteria, String studentGrade, String fullGrade, Long givenAssignmentId) {
+		this.criteria = criteria;
+		this.studentGrade = studentGrade;
+		this.fullGrade = fullGrade;
+		this.givenAssignmentId = givenAssignmentId;
+	}
+
 	public String getCriteria() {
 		return criteria;
 	}
