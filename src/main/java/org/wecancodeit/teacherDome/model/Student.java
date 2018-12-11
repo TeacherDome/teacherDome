@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -20,12 +21,17 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
-//	@Lob
-//	private String studentTeacherNote;
-//	@Lob
-//	private String studentFamilyNote;
-//	@Lob
-//	private String studentImportantInformation;
+	private String studentDateOfBirth;
+
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentProgressNotes;
+
+	@Lob
+	private String studentComments;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
@@ -49,6 +55,38 @@ public class Student {
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
 		this.studentIsRetired = false;
+	}
+
+	public String getStudentDateOfBirth() {
+		return studentDateOfBirth;
+	}
+
+	public void setStudentDateOfBirth(String studentDateOfBirth) {
+		this.studentDateOfBirth = studentDateOfBirth;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public void setStudentHealthNotes(String studentHealthNotes) {
+		this.studentHealthNotes = studentHealthNotes;
+	}
+
+	public String getStudentProgressNotes() {
+		return studentProgressNotes;
+	}
+
+	public void setStudentProgressNotes(String studentProgressNotes) {
+		this.studentProgressNotes = studentProgressNotes;
+	}
+
+	public String getStudentComments() {
+		return studentComments;
+	}
+
+	public void setStudentComments(String studentComments) {
+		this.studentComments = studentComments;
 	}
 
 	public void setStudentIsRetired(boolean studentIsRetired) {
@@ -89,6 +127,10 @@ public class Student {
 
 	public Collection<MathData> getMathGrades() {
 		return mathGrades;
+	}
+
+	public Collection<ReadingData> getReadingGrades() {
+		return readingGrades;
 	}
 
 	public void addMathScore(MathData score) {
