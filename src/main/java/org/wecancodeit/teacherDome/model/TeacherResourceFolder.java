@@ -17,14 +17,24 @@ public class TeacherResourceFolder {
 	private String resourceFolderName;
 	
 	@OneToMany
-	Map<String, TeacherResourceLink> links = new HashMap<String,TeacherResourceLink>();
+	private Map<String, TeacherResourceLink> links;
 
 	public TeacherResourceFolder() {
 
 	}
 
-	public TeacherResourceFolder(String resourceFolderName) {
+//	public TeacherResourceFolder(String resourceFolderName) {
+//		this.resourceFolderName = resourceFolderName;
+//	}
+
+	public TeacherResourceFolder(String resourceFolderName, Map<String, TeacherResourceLink> links) {
+		
 		this.resourceFolderName = resourceFolderName;
+		this.links = links;
+	}
+
+	public Map<String, TeacherResourceLink> getLinks() {
+		return links;
 	}
 
 	public Long getResourceFolderId() {

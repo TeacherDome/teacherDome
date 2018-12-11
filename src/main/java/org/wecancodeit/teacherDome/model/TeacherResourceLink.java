@@ -24,10 +24,15 @@ public class TeacherResourceLink {
 	public TeacherResourceLink() {
 	}
 
-	public TeacherResourceLink(String resourceLinkName, String resourceLinkDescription, Long belongsToFolderId) {
+	public TeacherResourceLink(String resourceLinkName, String resourceLinkDescription, Long belongsToFolderId, TeacherResourceFolder folder) {
 		this.resourceLinkName = resourceLinkName;
 		this.resourceLinkDescription = resourceLinkDescription;
 		this.belongsToFolderId = belongsToFolderId;
+		this.folder= folder;
+	}
+
+	public TeacherResourceFolder getFolder() {
+		return folder;
 	}
 
 	public Long getResourceLinkId() {

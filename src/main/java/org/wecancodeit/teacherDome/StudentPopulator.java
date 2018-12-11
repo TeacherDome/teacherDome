@@ -2,6 +2,7 @@ package org.wecancodeit.teacherDome;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
@@ -49,7 +50,7 @@ public class StudentPopulator implements CommandLineRunner {
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
 
-		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework", new HashMap<>());
 		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
 
 		Treasury treasury1 = new Treasury(200.00);
@@ -65,9 +66,11 @@ public class StudentPopulator implements CommandLineRunner {
 		mathRepo.save(new MathData("Dec 5, 2018", 400, student1));
 		mathRepo.save(math2);
 		mathRepo.save(math3);
+		
+		
 
-		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
-		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
+		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
+		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
   }
 
 	ArrayList<String> createDatesList(String[] dates) {
