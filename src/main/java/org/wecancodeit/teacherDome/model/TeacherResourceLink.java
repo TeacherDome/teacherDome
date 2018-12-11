@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TeacherResourceLink {
@@ -12,18 +13,25 @@ public class TeacherResourceLink {
 	@GeneratedValue
 	private Long resourceLinkId;
 	private String resourceLinkName;
-	private Long belongsToFolderId;
+	
 
 	@Lob
 	private String resourceLinkDescription;
+	
+	@ManyToOne
+	private TeacherResourceFolder folder;
 
 	public TeacherResourceLink() {
 	}
 
-	public TeacherResourceLink(String resourceLinkName, String resourceLinkDescription, Long belongsToFolderId) {
+	public TeacherResourceLink(String resourceLinkName, String resourceLinkDescription, TeacherResourceFolder folder) {
 		this.resourceLinkName = resourceLinkName;
 		this.resourceLinkDescription = resourceLinkDescription;
-		this.belongsToFolderId = belongsToFolderId;
+		this.folder= folder;
+	}
+
+	public TeacherResourceFolder getFolder() {
+		return folder;
 	}
 
 	public Long getResourceLinkId() {
@@ -38,7 +46,4 @@ public class TeacherResourceLink {
 		return resourceLinkDescription;
 	}
 
-	public Long getBelongsToFolderId() {
-		return belongsToFolderId;
-	}
 }
