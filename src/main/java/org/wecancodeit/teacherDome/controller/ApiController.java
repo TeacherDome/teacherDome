@@ -8,16 +8,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.wecancodeit.teacherDome.model.Assignment;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.repositories.AssignmentRepository;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
@@ -46,6 +47,9 @@ public class ApiController {
 
 	@Resource
 	ContactRepository contactRepo;
+
+	@Resource
+	AssignmentRepository assignRepo;
 
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
@@ -287,4 +291,21 @@ public class ApiController {
 		return mathRepo.findAll();
 	}
 
+	// grades
+	@GetMapping("/api/assignments")
+	public Collection<Assignment> getAssignments() {
+		return (Collection<Assignment>) assignRepo.findAll();
+	}
+
+	@PostMapping("/api/assignments/addAssignment")
+	public Collection<Assignment> addAssignment(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentIdSent");
+		String assignmentName = json.getString("assignmentNameSent");
+		Long studentIdLong = Long.parseLong(studentId);
+
+		Assignment assignemnt = new Assignment(assignmentName, studentIdLong);
+		assignemnt = assignRepo.save(assignemnt);
+		return (Collection<Assignment>) assignRepo.findByGivenStudentId(studentIdLong);
+	}
 }

@@ -17,10 +17,14 @@ import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.model.Assignment;
+import org.wecancodeit.teacherDome.model.RubricElement;
+import org.wecancodeit.teacherDome.repositories.AssignmentRepository;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
+import org.wecancodeit.teacherDome.repositories.RubricElementRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
 import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
@@ -45,6 +49,12 @@ public class StudentPopulator implements CommandLineRunner {
 
 	@Resource
 	ContactRepository contactRepo;
+
+	@Resource
+	AssignmentRepository assignRepo;
+
+	@Resource
+	RubricElementRepository rERepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -106,10 +116,11 @@ public class StudentPopulator implements CommandLineRunner {
 
 	private ArrayList<Integer> createScoreList(Integer[] scores) {
 		return new ArrayList<>(Arrays.asList(scores));
-	}
+  }
 
-	private ArrayList<Student> createStudentList(Student[] students) {
-		return new ArrayList<Student>(Arrays.asList(students));
+		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
+
 	}
 
 	
