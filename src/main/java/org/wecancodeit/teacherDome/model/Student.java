@@ -1,9 +1,12 @@
 package org.wecancodeit.teacherDome.model;
 
 import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,6 +21,17 @@ public class Student {
 	private String studentSchoolIdNumber;
 	private boolean studentIsRetired;
 
+	private String studentDateOfBirth;
+
+	@Lob
+	private String studentHealthNotes;
+
+	@Lob
+	private String studentProgressNotes;
+
+	@Lob
+	private String studentComments;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<MathData> mathGrades;
@@ -25,6 +39,10 @@ public class Student {
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	public Collection<ReadingData> readingGrades;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "students")
+	private Collection<Contact> contacts;
 
 	public Student() {
 
@@ -37,6 +55,38 @@ public class Student {
 		this.studentLastName = studentLastName;
 		this.studentSchoolIdNumber = studentSchoolIdNumber;
 		this.studentIsRetired = false;
+	}
+
+	public String getStudentDateOfBirth() {
+		return studentDateOfBirth;
+	}
+
+	public void setStudentDateOfBirth(String studentDateOfBirth) {
+		this.studentDateOfBirth = studentDateOfBirth;
+	}
+
+	public String getStudentHealthNotes() {
+		return studentHealthNotes;
+	}
+
+	public void setStudentHealthNotes(String studentHealthNotes) {
+		this.studentHealthNotes = studentHealthNotes;
+	}
+
+	public String getStudentProgressNotes() {
+		return studentProgressNotes;
+	}
+
+	public void setStudentProgressNotes(String studentProgressNotes) {
+		this.studentProgressNotes = studentProgressNotes;
+	}
+
+	public String getStudentComments() {
+		return studentComments;
+	}
+
+	public void setStudentComments(String studentComments) {
+		this.studentComments = studentComments;
 	}
 
 	public void setStudentIsRetired(boolean studentIsRetired) {
@@ -79,6 +129,10 @@ public class Student {
 		return mathGrades;
 	}
 
+	public Collection<ReadingData> getReadingGrades() {
+		return readingGrades;
+	}
+
 	public void addMathScore(MathData score) {
 		mathGrades.add(score);
 	}
@@ -87,8 +141,33 @@ public class Student {
 		readingGrades.add(score);
 	}
 
-//	@JsonIgnore
-//	@ManyToMany
-//	private Set<Contact> contacts;
+	public Collection<Contact> getContacts() {
+		return contacts;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		} else if (!studentId.equals(other.studentId))
+			return false;
+		return true;
+	}
 
 }

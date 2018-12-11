@@ -8,18 +8,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
-import org.wecancodeit.teacherDome.model.Student;
-import org.wecancodeit.teacherDome.repositories.MathDataRepository;
-import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.model.Receipt;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
+import org.wecancodeit.teacherDome.repositories.ContactRepository;
+import org.wecancodeit.teacherDome.repositories.MathDataRepository;
+import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
@@ -36,12 +37,15 @@ public class ApiController {
 
 	@Resource
 	ReadingDataRepository readingRepo;
-  
-  @Resource
-  TreasuryRepository treasureRepo;
+
+	@Resource
+	TreasuryRepository treasureRepo;
 
 	@Resource
 	ReceiptRepository receiptsRepo;
+
+	@Resource
+	ContactRepository contactRepo;
 
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
@@ -78,6 +82,8 @@ public class ApiController {
 		studentRepo.save(student);
 		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
 	}
+
+//	@RequestMapping("/api/ContactPage/{contactId}")
 
 	@PutMapping("/api/students/retireStudent")
 	public Collection<Student> retireStudent(@RequestBody String body) throws JSONException {
@@ -141,6 +147,21 @@ public class ApiController {
 
 	}
 
+	@PutMapping("/api/students/updateStudentDateofBirth")
+	public Collection<Student> updateStudentDateofBirth(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentDateOfBirth = json.getString("studentDateOfBirth");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentDateOfBirth(studentDateOfBirth);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
 	@PutMapping("/api/students/updateStudentSchoolId")
 	public Collection<Student> updateStudentSchoolId(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
@@ -156,6 +177,49 @@ public class ApiController {
 
 	}
 
+	@PutMapping("/api/students/updateStudentHealthNotes")
+	public Collection<Student> updateStudentHealthNotes(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentHealthNotes = json.getString("studentHealthNotes");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentHealthNotes(studentHealthNotes);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+
+	}
+
+	@PutMapping("/api/students/updateStudentProgress")
+	public Collection<Student> updateStudentProgress(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentProgressNotes = json.getString("studentProgressNotes");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentProgressNotes(studentProgressNotes);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+	}
+
+	@PutMapping("/api/students/updateStudentComments")
+	public Collection<Student> updateStudentComments(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentId = json.getString("studentId");
+		String studentComments = json.getString("studentComments");
+
+		Long studentIdLong = Long.parseLong(studentId);
+		Student student = studentRepo.findById(studentIdLong).get();
+
+		student.setStudentComments(studentComments);
+		studentRepo.save(student);
+		return (Collection<Student>) studentRepo.findByStudentIsRetired(false);
+	}
+
 	// treasury
 	@GetMapping("/api/treasury")
 	public Collection<Treasury> getTreasury() {
@@ -168,8 +232,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("addComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, true);
@@ -186,8 +249,7 @@ public class ApiController {
 		String addFunds = json.getString("addFunds");
 		String comment = json.getString("subComment");
 		double fundDouble = Double.parseDouble(addFunds);
-		Long id = (long) 10;
-		Treasury treasury = treasureRepo.findById(id).get();
+		Treasury treasury = treasureRepo.findById((long) 111).get();
 		double intialFunds = treasury.getFunds();
 		Receipt receipt = new Receipt(intialFunds, comment, fundDouble);
 		receipt.setLineItem(intialFunds, comment, fundDouble, false);
@@ -209,6 +271,20 @@ public class ApiController {
 		JSONObject json = new JSONObject(body);
 		return (Collection<Receipt>) receiptsRepo.findAll();
 
+	}
+
+	@PostMapping("/api/student/add-score")
+	public Iterable<MathData> addMathScore(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String date = json.getString("date");
+		int score = json.getInt("score");
+		String studentId = json.getString("studentId");
+		Long id = Long.parseLong(studentId);
+		Student studentForThisScore = studentRepo.findById(id).get();
+
+		mathRepo.save(new MathData(date, score, studentForThisScore));
+
+		return mathRepo.findAll();
 	}
 
 }
