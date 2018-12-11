@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.teacherDome.model.Contact;
+import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 
@@ -35,6 +35,7 @@ public class ContactApiController {
 	@PostMapping("/api/ContactPage/addContact")
 	public Collection<Contact> addContact(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
+		System.out.println(json);
 		String contactFirstName = json.getString("contactFirstName");
 		String contactLastName = json.getString("contactLastName");
 		String contactRelationship = json.getString("contactRelationship");
@@ -47,13 +48,14 @@ public class ContactApiController {
 		String contactHomePhoneNumber = json.getString("contactHomePhoneNumber");
 		String contactWorkPhoneNumber = json.getString("contactWorkPhoneNumber");
 		String contactPriority = json.getString("contactPriority");
-		String contactStudents = json.getString("contactStudents");
-		JSONArray studentsArray = json.getJSONArray("studentsArray");
-
+		String contactStudentId = json.getString("contactStudentId");
+		Long contactIdLong = Long.parseLong(contactStudentId);
+		Student student = studentRepo.findById(contactIdLong).get();
 		Contact contact = new Contact(contactFirstName, contactLastName, contactRelationship, contactStreet,
 				contactCity, contactState, contactZipCode, contactEmail, contactCellPhoneNumber, contactHomePhoneNumber,
-				contactWorkPhoneNumber, contactPriority);
-		return (Collection<Contact>) contactRepo.findAll();
+				contactWorkPhoneNumber, contactPriority, student);
+		contactRepo.save(contact);
+		return (Collection<Contact>) studentRepo.findById(contactIdLong).get().getContacts();
 	}
 
 	@PutMapping("/api/ContactPage/updateContactFirstName")
