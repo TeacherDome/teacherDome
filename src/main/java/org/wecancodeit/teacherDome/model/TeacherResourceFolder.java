@@ -17,7 +17,7 @@ public class TeacherResourceFolder {
 	private String resourceFolderName;
 	
 	@OneToMany
-	private Map<String, TeacherResourceLink> links;
+	private Map<Long, TeacherResourceLink> links;
 
 	public TeacherResourceFolder() {
 
@@ -27,13 +27,13 @@ public class TeacherResourceFolder {
 //		this.resourceFolderName = resourceFolderName;
 //	}
 
-	public TeacherResourceFolder(String resourceFolderName, Map<String, TeacherResourceLink> links) {
+	public TeacherResourceFolder(String resourceFolderName, Map<Long, TeacherResourceLink> links) {
 		
 		this.resourceFolderName = resourceFolderName;
 		this.links = links;
 	}
 
-	public Map<String, TeacherResourceLink> getLinks() {
+	public Map<Long, TeacherResourceLink> getLinks() {
 		return links;
 	}
 

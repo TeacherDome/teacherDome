@@ -2,6 +2,7 @@ package org.wecancodeit.teacherDome.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -56,18 +57,24 @@ public class TeacherResourceApiController {
 		TeacherResourceFolder folder = teacherResourceFolderRepo.findById(resourceFolderIdLong).get();
 		return folder;
 	}
-//
-//	@PostMapping("/api/TeacherResourcePage/addResourceLink")
-//	public Collection<TeacherResourceLink> addResourceLink(@RequestBody String body) throws JSONException {
-//		JSONObject json = new JSONObject(body);
-//		String resourceLinkName = json.getString("resourceLinkName");
-//		String resourceLinkDescription = json.getString("linkDescription");
-//		Long belongsToFolderId = json.getLong("linkFolderId");
+
+	@PostMapping("/api/TeacherResourcePage/addLink")
+	public Collection<TeacherResourceLink> addResourceLink(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String resourceLinkName = json.getString("LinkName");
+		String resourceLinkDescription = json.getString("LinkDescription");
+		String folderIdfromBody = json.getString("FolderId");
+		System.out.println(folderIdfromBody);
+		Long resourceFolderIdLong = Long.parseLong(folderIdfromBody); 
+		TeacherResourceFolder folder = teacherResourceFolderRepo.findById(resourceFolderIdLong).get();
+		TeacherResourceLink link = new TeacherResourceLink(resourceLinkName,resourceLinkDescription ,folder);
+		teacherResourceLinkRepo.save(link);
+		return (Collection<TeacherResourceLink>) teacherResourceLinkRepo.findAll();
+		
+//		Map<Long,TeacherResourceLink>
 //		 TeacherResourceFolder folder = teacherResourceFolderRepo.findById(resourceFolderId);
 //		TeacherResourceLink resourceLink = new TeacherResourceLink(resourceLinkName, resourceLinkDescription,
 //				belongsToFolderId, folder);
-//		teacherResourceLinkRepo.save(resourceLink);
-//		return (Collection<TeacherResourceLink>) teacherResourceLinkRepo.findAll();
-//	}
+	}
 	
 }
