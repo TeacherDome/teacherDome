@@ -129,6 +129,10 @@ public class Student {
 		return mathGrades;
 	}
 
+	public Collection<ReadingData> getReadingGrades() {
+		return readingGrades;
+	}
+
 	public void addMathScore(MathData score) {
 		mathGrades.add(score);
 	}
