@@ -37,7 +37,7 @@ public class ApiContorllerTest {
 	StudentRepository studentRepo;
 
 	Student mockStudent = new Student("Mark", "Hamil", "Ab124", false);
-	String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}]";
+	String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false}]";
 
 	@Test
 	public void retrieveDetailsFromStudent() throws Exception {
