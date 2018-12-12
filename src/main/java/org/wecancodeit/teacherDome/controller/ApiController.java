@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -331,6 +332,15 @@ public class ApiController {
 
 		RubricElement grade = new RubricElement(criteria, studentScore, fullScore, assignmentIdLong);
 		grade = gradesRepo.save(grade);
+
+		Assignment assignement = assignRepo.findById(assignmentIdLong).get();
+		double studentScoreDouble = Double.parseDouble(studentScore);
+		double fullScoreDouble = Double.parseDouble(fullScore);
+
+		assignement.setTotalStudentGrade(studentScoreDouble);
+		assignement.setTotalGrade(fullScoreDouble);
+		assignement = assignRepo.save(assignement);
+
 		return (Collection<RubricElement>) gradesRepo.findByGivenAssignmentId(assignmentIdLong);
 	}
 
