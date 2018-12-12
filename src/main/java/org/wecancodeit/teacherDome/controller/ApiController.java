@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,14 +61,20 @@ public class ApiController {
 		return (Collection<Student>) studentRepo.findAll();
 	}
 
-	@GetMapping("/api/math-scores")
-	public Iterable<MathData> getMathData() {
-		return mathRepo.findAll();
+	@PutMapping("/api/math-scores")
+	public Collection<MathData> getMathData(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentIdfromBody = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentIdfromBody);
+		return studentRepo.findById(studentIdLong).get().getMathGrades();
 	}
 
-	@GetMapping("/api/reading-scores")
-	public Iterable<ReadingData> getReadingData() {
-		return readingRepo.findAll();
+	@PutMapping("/api/reading-scores")
+	public Collection<ReadingData> getReadingData(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentIdfromBody = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentIdfromBody);
+		return studentRepo.findById(studentIdLong).get().getReadingGrades();
 	}
 
 	@PutMapping("/api/student")
@@ -283,8 +288,8 @@ public class ApiController {
 
 	}
 
-	@PostMapping("/api/student/add-score")
-	public Iterable<MathData> addMathScore(@RequestBody String body) throws JSONException {
+	@PostMapping("/api/student/add-math-score")
+	public void addMathScore(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String date = json.getString("date");
 		int score = json.getInt("score");
@@ -293,8 +298,19 @@ public class ApiController {
 		Student studentForThisScore = studentRepo.findById(id).get();
 
 		mathRepo.save(new MathData(date, score, studentForThisScore));
+	}
 
-		return mathRepo.findAll();
+	@PostMapping("/api/student/add-reading-score")
+	public void addReadingScore(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String date = json.getString("date");
+		int score = json.getInt("score");
+		String studentId = json.getString("studentId");
+		Long id = Long.parseLong(studentId);
+		Student studentForThisScore = studentRepo.findById(id).get();
+
+		readingRepo.save(new ReadingData(date, score, studentForThisScore));
+
 	}
 
 	// assignments
