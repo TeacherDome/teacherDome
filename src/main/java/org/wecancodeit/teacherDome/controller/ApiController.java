@@ -7,25 +7,21 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.wecancodeit.teacherDome.model.Assignment;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Receipt;
-import org.wecancodeit.teacherDome.model.RubricElement;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
-import org.wecancodeit.teacherDome.repositories.AssignmentRepository;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
-import org.wecancodeit.teacherDome.repositories.RubricElementRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
 
@@ -51,25 +47,25 @@ public class ApiController {
 	@Resource
 	ContactRepository contactRepo;
 
-	@Resource
-	AssignmentRepository assignRepo;
-
-	@Resource
-	RubricElementRepository gradesRepo;
-
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
 		return (Collection<Student>) studentRepo.findAll();
 	}
 
-	@GetMapping("/api/math-scores")
-	public Iterable<MathData> getMathData() {
-		return mathRepo.findAll();
+	@PutMapping("/api/math-scores")
+	public Collection<MathData> getMathData(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentIdfromBody = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentIdfromBody);
+		return studentRepo.findById(studentIdLong).get().getMathGrades();
 	}
 
 	@GetMapping("/api/reading-scores")
-	public Iterable<ReadingData> getReadingData() {
-		return readingRepo.findAll();
+	public Collection<ReadingData> getReadingData(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String studentIdfromBody = json.getString("studentId");
+		Long studentIdLong = Long.parseLong(studentIdfromBody);
+		return studentRepo.findById(studentIdLong).get().getReadingGrades();
 	}
 
 	@PutMapping("/api/student")
@@ -283,8 +279,8 @@ public class ApiController {
 
 	}
 
-	@PostMapping("/api/student/add-score")
-	public Iterable<MathData> addMathScore(@RequestBody String body) throws JSONException {
+	@PostMapping("/api/student/add-math-score")
+	public void addMathScore(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String date = json.getString("date");
 		int score = json.getInt("score");
@@ -293,55 +289,17 @@ public class ApiController {
 		Student studentForThisScore = studentRepo.findById(id).get();
 
 		mathRepo.save(new MathData(date, score, studentForThisScore));
-
-		return mathRepo.findAll();
 	}
 
-	// assignments
-	@GetMapping("/api/assignments")
-	public Collection<Assignment> getAssignments() {
-		return (Collection<Assignment>) assignRepo.findAll();
-	}
-
-	@PostMapping("/api/assignments/addAssignment")
-	public Collection<Assignment> addAssignment(@RequestBody String body) throws JSONException {
+	@PostMapping("/api/student/add-reading-score")
+	public void addReadingScore(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		String studentId = json.getString("studentIdSent");
-		String assignmentName = json.getString("assignmentNameSent");
-		Long studentIdLong = Long.parseLong(studentId);
+		String date = json.getString("date");
+		int score = json.getInt("score");
+		String studentId = json.getString("studentId");
+		Long id = Long.parseLong(studentId);
+		Student studentForThisScore = studentRepo.findById(id).get();
 
-		Assignment assignemnt = new Assignment(assignmentName, studentIdLong);
-		assignemnt = assignRepo.save(assignemnt);
-		return (Collection<Assignment>) assignRepo.findByGivenStudentId(studentIdLong);
+		readingRepo.save(new ReadingData(date, score, studentForThisScore));
 	}
-
-	// grades
-	@GetMapping("/api/grades")
-	public Collection<RubricElement> getGrades() {
-		return (Collection<RubricElement>) gradesRepo.findAll();
-	}
-
-	@PostMapping("/api/grades/addGrade")
-	public Collection<RubricElement> addGrade(@RequestBody String body) throws JSONException {
-		JSONObject json = new JSONObject(body);
-		String assignmentId = json.getString("assignmentId");
-		String criteria = json.getString("criteriaSent");
-		String studentScore = json.getString("studentScoreSent");
-		String fullScore = json.getString("fullScoreSent");
-		Long assignmentIdLong = Long.parseLong(assignmentId);
-
-		RubricElement grade = new RubricElement(criteria, studentScore, fullScore, assignmentIdLong);
-		grade = gradesRepo.save(grade);
-
-		Assignment assignement = assignRepo.findById(assignmentIdLong).get();
-		double studentScoreDouble = Double.parseDouble(studentScore);
-		double fullScoreDouble = Double.parseDouble(fullScore);
-
-		assignement.setTotalStudentGrade(studentScoreDouble);
-		assignement.setTotalGrade(fullScoreDouble);
-		assignement = assignRepo.save(assignement);
-
-		return (Collection<RubricElement>) gradesRepo.findByGivenAssignmentId(assignmentIdLong);
-	}
-
 }
