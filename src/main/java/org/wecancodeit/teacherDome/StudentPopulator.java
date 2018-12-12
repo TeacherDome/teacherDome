@@ -1,5 +1,11 @@
 package org.wecancodeit.teacherDome;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -62,7 +68,7 @@ public class StudentPopulator implements CommandLineRunner {
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
 
-		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework");
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework", new HashMap<>());
 		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
 
 		Treasury treasury1 = new Treasury(200.00);
@@ -100,9 +106,24 @@ public class StudentPopulator implements CommandLineRunner {
 				"abc@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
 		contactRepo.save(new Contact("Abby", "Schmoe", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
+		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
+		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
+	}  
+
+	ArrayList<String> createDatesList(String[] dates) {
+		return new ArrayList<>(Arrays.asList(dates));
+	}
+
+	private ArrayList<Integer> createScoreList(Integer[] scores) {
+		return new ArrayList<>(Arrays.asList(scores));
+  }
+
+		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
 
 		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
 		assignment1 = assignRepo.save(assignment1);
 	}
 
+	
 }
