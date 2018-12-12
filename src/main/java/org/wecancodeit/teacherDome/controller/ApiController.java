@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import org.wecancodeit.teacherDome.model.Assignment;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Receipt;
+import org.wecancodeit.teacherDome.model.RubricElement;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.Treasury;
 import org.wecancodeit.teacherDome.repositories.AssignmentRepository;
@@ -23,6 +25,7 @@ import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReadingDataRepository;
 import org.wecancodeit.teacherDome.repositories.ReceiptRepository;
+import org.wecancodeit.teacherDome.repositories.RubricElementRepository;
 import org.wecancodeit.teacherDome.repositories.StudentRepository;
 import org.wecancodeit.teacherDome.repositories.TreasuryRepository;
 
@@ -50,6 +53,9 @@ public class ApiController {
 
 	@Resource
 	AssignmentRepository assignRepo;
+
+	@Resource
+	RubricElementRepository gradesRepo;
 
 	@GetMapping("/api/students")
 	public Collection<Student> getStudents() {
@@ -291,7 +297,7 @@ public class ApiController {
 		return mathRepo.findAll();
 	}
 
-	// grades
+	// assignments
 	@GetMapping("/api/assignments")
 	public Collection<Assignment> getAssignments() {
 		return (Collection<Assignment>) assignRepo.findAll();
@@ -308,4 +314,34 @@ public class ApiController {
 		assignemnt = assignRepo.save(assignemnt);
 		return (Collection<Assignment>) assignRepo.findByGivenStudentId(studentIdLong);
 	}
+
+	// grades
+	@GetMapping("/api/grades")
+	public Collection<RubricElement> getGrades() {
+		return (Collection<RubricElement>) gradesRepo.findAll();
+	}
+
+	@PostMapping("/api/grades/addGrade")
+	public Collection<RubricElement> addGrade(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		String assignmentId = json.getString("assignmentId");
+		String criteria = json.getString("criteriaSent");
+		String studentScore = json.getString("studentScoreSent");
+		String fullScore = json.getString("fullScoreSent");
+		Long assignmentIdLong = Long.parseLong(assignmentId);
+
+		RubricElement grade = new RubricElement(criteria, studentScore, fullScore, assignmentIdLong);
+		grade = gradesRepo.save(grade);
+
+		Assignment assignement = assignRepo.findById(assignmentIdLong).get();
+		double studentScoreDouble = Double.parseDouble(studentScore);
+		double fullScoreDouble = Double.parseDouble(fullScore);
+
+		assignement.setTotalStudentGrade(studentScoreDouble);
+		assignement.setTotalGrade(fullScoreDouble);
+		assignement = assignRepo.save(assignement);
+
+		return (Collection<RubricElement>) gradesRepo.findByGivenAssignmentId(assignmentIdLong);
+	}
+
 }
