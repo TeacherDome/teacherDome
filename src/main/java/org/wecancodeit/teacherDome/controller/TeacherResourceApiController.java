@@ -2,7 +2,7 @@ package org.wecancodeit.teacherDome.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
+
 
 import javax.annotation.Resource;
 
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.TeacherResourceLink;
 import org.wecancodeit.teacherDome.repositories.TeacherResourceFolderRepository;
@@ -71,10 +70,6 @@ public class TeacherResourceApiController {
 		teacherResourceLinkRepo.save(link);
 		return (Collection<TeacherResourceLink>) teacherResourceLinkRepo.findAll();
 		
-//		Map<Long,TeacherResourceLink>
-//		 TeacherResourceFolder folder = teacherResourceFolderRepo.findById(resourceFolderId);
-//		TeacherResourceLink resourceLink = new TeacherResourceLink(resourceLinkName, resourceLinkDescription,
-//				belongsToFolderId, folder);
 	}
 	
 }
