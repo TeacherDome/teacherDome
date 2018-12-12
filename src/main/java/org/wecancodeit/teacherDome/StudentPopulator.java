@@ -1,10 +1,8 @@
 package org.wecancodeit.teacherDome;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
 
 import javax.annotation.Resource;
 
@@ -108,25 +106,20 @@ public class StudentPopulator implements CommandLineRunner {
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
 		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
 		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
-	}  
 
-	ArrayList<String> createDatesList(String[] dates) {
-		return new ArrayList<>(Arrays.asList(dates));
-	}
+//
+//	ArrayList<String> createDatesList(String[] dates) {
+//		return new ArrayList<>(Arrays.asList(dates));
+//	}
+//
+//	private ArrayList<Integer> createScoreList(Integer[] scores) {
+//		return new ArrayList<>(Arrays.asList(scores));
+//  }
 
-	private ArrayList<Integer> createScoreList(Integer[] scores) {
-		return new ArrayList<>(Arrays.asList(scores));
-  }
+		Assignment assignment1 = new Assignment("Reading Assignment: Ella Enchanted", student1.getStudentId());
 
-		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
-		assignment1 = assignRepo.save(assignment1);
-
-		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
-		assignment1 = assignRepo.save(assignment1);
-
-		RubricElement grade1 = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
+		RubricElement grade1 = new RubricElement("Read Chapter 1 on Time", "8", "10", assignment1.getAssignmentId());
 		grade1 = gradeRepo.save(grade1);
 	}
 
-	
 }
