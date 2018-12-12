@@ -37,7 +37,7 @@ public class ApiContorllerTest {
 	StudentRepository studentRepo;
 
 	Student mockStudent = new Student("Mark", "Hamil", "Ab124", false);
-	String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false,\"mathGrades\":{},\"readingGrades\":{}}]";
+	String exampleStudentJson = "[{\"studentLastName\":\"Hamil\",\"studentFirstName\":\"Mark\",\"studentId\":null,\"studentSchoolIdNumber\":\"Ab124\",\"studentIsRetired\":false}]";
 
 	@Test
 	public void retrieveDetailsFromStudent() throws Exception {
@@ -73,13 +73,100 @@ public class ApiContorllerTest {
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
 	}
 	// Can retire a student
+	@Test
+	public void retireStudent() throws Exception {
+		// Make new student
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 
+		// Mock saving student
+		Mockito.when(studentRepo.save(Mockito.any(Student.class))).thenReturn(mockStudent2);
+
+		// Send Mock request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/students/retireStudent")
+				.accept(MediaType.APPLICATION_JSON).content(exampleStudentJson).contentType(MediaType.APPLICATION_JSON);
+
+		// Get Http Response Value
+		MockHttpServletResponse response = mockMvc.perform(requestBuilder).andReturn().getResponse();
+
+		// Assert that you get a 2xx level response
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
+	
+	
 	// Can update a student
+	@Test
+	public void updateStudent() throws Exception {
+		// Make new student
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 
+		// Mock saving student
+		Mockito.when(studentRepo.save(Mockito.any(Student.class))).thenReturn(mockStudent2);
+
+		// Send Mock request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/students/updateStudent")
+				.accept(MediaType.APPLICATION_JSON).content(exampleStudentJson).contentType(MediaType.APPLICATION_JSON);
+
+		// Get Http Response Value
+		MockHttpServletResponse response = mockMvc.perform(requestBuilder).andReturn().getResponse();
+
+		// Assert that you get a 2xx level response
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}	
 	// Can update first name
+	@Test
+	public void updateStudentFirstName() throws Exception {
+		// Make new student
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 
+		// Mock saving student
+		Mockito.when(studentRepo.save(Mockito.any(Student.class))).thenReturn(mockStudent2);
+
+		// Send Mock request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/students/updateStudentFirstName")
+				.accept(MediaType.APPLICATION_JSON).content(exampleStudentJson).contentType(MediaType.APPLICATION_JSON);
+
+		// Get Http Response Value
+		MockHttpServletResponse response = mockMvc.perform(requestBuilder).andReturn().getResponse();
+
+		// Assert that you get a 2xx level response
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}	
 	// Can update last name
+	@Test
+	public void updateStudentLastName() throws Exception {
+		// Make new student
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 
+		// Mock saving student
+		Mockito.when(studentRepo.save(Mockito.any(Student.class))).thenReturn(mockStudent2);
+
+		// Send Mock request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/students/updateStudentLastName")
+				.accept(MediaType.APPLICATION_JSON).content(exampleStudentJson).contentType(MediaType.APPLICATION_JSON);
+
+		// Get Http Response Value
+		MockHttpServletResponse response = mockMvc.perform(requestBuilder).andReturn().getResponse();
+
+		// Assert that you get a 2xx level response
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
 	// Can update school id
+	@Test
+	public void updateStudentSchoolID() throws Exception {
+		// Make new student
+		Student mockStudent2 = new Student("Becky", "Hamil", "Ab125", false);
 
+		// Mock saving student
+		Mockito.when(studentRepo.save(Mockito.any(Student.class))).thenReturn(mockStudent2);
+
+		// Send Mock request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/students/updateStudentSchoolId")
+				.accept(MediaType.APPLICATION_JSON).content(exampleStudentJson).contentType(MediaType.APPLICATION_JSON);
+
+		// Get Http Response Value
+		MockHttpServletResponse response = mockMvc.perform(requestBuilder).andReturn().getResponse();
+
+		// Assert that you get a 2xx level response
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
 }
