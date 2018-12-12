@@ -1,3 +1,4 @@
+
 package org.wecancodeit.teacherDome.model;
 
 import java.util.Arrays;

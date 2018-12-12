@@ -121,6 +121,8 @@ public class StudentPopulator implements CommandLineRunner {
 		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
 		assignment1 = assignRepo.save(assignment1);
 
+		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
 	}
 
 	
