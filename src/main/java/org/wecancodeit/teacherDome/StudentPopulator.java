@@ -104,8 +104,8 @@ public class StudentPopulator implements CommandLineRunner {
 		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
 		assignment1 = assignRepo.save(assignment1);
 
-		RubricElement grade = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
-		grade = gradeRepo.save(grade);
+		RubricElement grade1 = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
+		grade1 = gradeRepo.save(grade1);
 	}
 
 }
