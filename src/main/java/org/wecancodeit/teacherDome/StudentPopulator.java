@@ -1,22 +1,21 @@
+
 package org.wecancodeit.teacherDome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import org.wecancodeit.teacherDome.model.Assignment;
 import org.wecancodeit.teacherDome.model.Contact;
 import org.wecancodeit.teacherDome.model.MathData;
 import org.wecancodeit.teacherDome.model.ReadingData;
 import org.wecancodeit.teacherDome.model.Receipt;
+import org.wecancodeit.teacherDome.model.RubricElement;
 import org.wecancodeit.teacherDome.model.Student;
 import org.wecancodeit.teacherDome.model.TeacherResourceFolder;
 import org.wecancodeit.teacherDome.model.Treasury;
-import org.wecancodeit.teacherDome.model.Assignment;
-import org.wecancodeit.teacherDome.model.RubricElement;
 import org.wecancodeit.teacherDome.repositories.AssignmentRepository;
 import org.wecancodeit.teacherDome.repositories.ContactRepository;
 import org.wecancodeit.teacherDome.repositories.MathDataRepository;
@@ -104,21 +103,11 @@ public class StudentPopulator implements CommandLineRunner {
 				"abc@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
 		contactRepo.save(new Contact("Abby", "Schmoe", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
-		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
-		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
-
-//
-//	ArrayList<String> createDatesList(String[] dates) {
-//		return new ArrayList<>(Arrays.asList(dates));
-//	}
-//
-//	private ArrayList<Integer> createScoreList(Integer[] scores) {
-//		return new ArrayList<>(Arrays.asList(scores));
-//  }
 
 		Assignment assignment1 = new Assignment("Reading Assignment: Ella Enchanted", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
 
-		RubricElement grade1 = new RubricElement("Read Chapter 1 on Time", "8", "10", assignment1.getAssignmentId());
+		RubricElement grade1 = new RubricElement("Read Chapter 1 On Time", "8", "10", assignment1.getAssignmentId());
 		grade1 = gradeRepo.save(grade1);
 	}
 
