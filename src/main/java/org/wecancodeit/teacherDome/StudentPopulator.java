@@ -52,7 +52,7 @@ public class StudentPopulator implements CommandLineRunner {
 	AssignmentRepository assignRepo;
 
 	@Resource
-	RubricElementRepository rERepo;
+	RubricElementRepository gradeRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -114,6 +114,19 @@ public class StudentPopulator implements CommandLineRunner {
 
 	private ArrayList<Integer> createScoreList(Integer[] scores) {
 		return new ArrayList<>(Arrays.asList(scores));
+<<<<<<< HEAD
+=======
+  }
+
+		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
+
+		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		assignment1 = assignRepo.save(assignment1);
+
+		RubricElement grade1 = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
+		grade1 = gradeRepo.save(grade1);
+>>>>>>> db06eb57505e68447e4b38e417b13d867f07c313
 	}
 
 //		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());

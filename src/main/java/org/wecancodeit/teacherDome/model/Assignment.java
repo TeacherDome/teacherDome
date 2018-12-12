@@ -15,6 +15,8 @@ public class Assignment {
 	private Long assignmentId;
 	private String assignmentName;
 	private Long givenStudentId;
+	private double totalStudentGrade = 0;
+	private double totalGrade = 0;
 
 	public Assignment() {
 
@@ -47,6 +49,22 @@ public class Assignment {
 
 	public Long getAssignmentId() {
 		return assignmentId;
+	}
+
+	public double getTotalStudentGrade() {
+		return totalStudentGrade;
+	}
+
+	public void setTotalStudentGrade(double totalStudentGrade) {
+		this.totalStudentGrade = this.totalStudentGrade + totalStudentGrade;
+	}
+
+	public double getTotalGrade() {
+		return totalGrade;
+	}
+
+	public void setTotalGrade(double totalGrade) {
+		this.totalGrade = this.totalGrade + totalGrade;
 	}
 
 }
