@@ -60,7 +60,7 @@ public class ApiController {
 		return studentRepo.findById(studentIdLong).get().getMathGrades();
 	}
 
-	@GetMapping("/api/reading-scores")
+	@PutMapping("/api/reading-scores")
 	public Collection<ReadingData> getReadingData(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		String studentIdfromBody = json.getString("studentId");
