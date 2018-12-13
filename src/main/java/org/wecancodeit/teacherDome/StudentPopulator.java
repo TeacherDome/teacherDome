@@ -1,6 +1,9 @@
 
 package org.wecancodeit.teacherDome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -109,6 +112,18 @@ public class StudentPopulator implements CommandLineRunner {
 
 		RubricElement grade1 = new RubricElement("Read Chapter 1 On Time", "8", "10", assignment1.getAssignmentId());
 		grade1 = gradeRepo.save(grade1);
+
+		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
+		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
+
+	}
+
+	ArrayList<String> createDatesList(String[] dates) {
+		return new ArrayList<>(Arrays.asList(dates));
+	}
+
+	private ArrayList<Integer> createScoreList(Integer[] scores) {
+		return new ArrayList<>(Arrays.asList(scores));
 	}
 
 }
