@@ -66,7 +66,7 @@ public class StudentPopulator implements CommandLineRunner {
 		student3 = studentRepo.save(student3);
 		student4 = studentRepo.save(student4);
 
-		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("homework", new HashMap<>());
+		TeacherResourceFolder teacherResourceFolder1 = new TeacherResourceFolder("Videos", new HashMap<>());
 		teacherResourceFolder1 = folderRepo.save(teacherResourceFolder1);
 
 		Treasury treasury1 = new Treasury(200.00);
@@ -101,17 +101,17 @@ public class StudentPopulator implements CommandLineRunner {
 		contactRepo.save(new Contact("Bobby", "Fay", "dad", "123 Abc Street", "Worthington", "Ohio", "43085",
 				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student1));
 		contactRepo.save(new Contact("Abby", "Fay", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
-				"abc@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
+				"def@yahoo.com", "6148889999", "6143333333", "6144444444", "Level 1", student1));
 		contactRepo.save(new Contact("Abby", "Schmoe", "mom", "123 Abc Street", "Worthington", "Ohio", "43085",
-				"abc@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
+				"ghi@yahoo.com", "6148888888", "6143333333", "6144444444", "Level 1", student2));
 
-		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("home work", new HashMap<>());
+		TeacherResourceFolder teacherResourceFolder2 = new TeacherResourceFolder("homework", new HashMap<>());
 		teacherResourceFolder2 = folderRepo.save(teacherResourceFolder2);
 
-		Assignment assignment1 = new Assignment("TEST", student1.getStudentId());
+		Assignment assignment1 = new Assignment("1800s", student1.getStudentId());
 		assignment1 = assignRepo.save(assignment1);
 
-		RubricElement grade1 = new RubricElement("TExt", "8", "10", assignment1.getAssignmentId());
+		RubricElement grade1 = new RubricElement("Industrial Revolution", "8", "10", assignment1.getAssignmentId());
 		grade1 = gradeRepo.save(grade1);
 	}
 
